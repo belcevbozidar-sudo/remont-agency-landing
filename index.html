@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Сайт, който носи обаждания - за ремонтни и строителни фирми</title>
-<meta name="description" content="Цялостен пакет: сайт на световно ниво, хостинг, поддръжка без лимит, SEO и чатбот, който води клиента до обаждане. 690 € еднократно + 29 €/месец.">
+<title>Сайт, който ви представя както трябва</title>
+<meta name="description" content="Цялостен пакет: сайт, хостинг, поддръжка, SEO настройка и чатбот за ремонтни и строителни фирми. 690 € еднократно + 29 €/месец.">
 <meta name="theme-color" content="#0B0B0C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -242,7 +242,7 @@ ul{margin:0;padding:0}
 .fcard p{color:#5C5B63;font-size:15px}
 
 /* ---------- faq ---------- */
-.faq{margin-top:44px;border-top:1px solid var(--line)}
+.faq{margin-top:24px}
 .q{border-bottom:1px solid var(--line)}
 .q button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 0;text-align:left;font-family:Unbounded;font-weight:600;font-size:clamp(15.5px,2vw,19px);letter-spacing:-.02em;transition:color .3s}
 .q button:hover{color:var(--accent)}
@@ -289,22 +289,7 @@ footer{border-top:1px solid var(--line);padding:46px 0 calc(46px + env(safe-area
 .frow2{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
 footer a:hover{color:var(--accent)}
 
-/* ---------- mobile sticky bar ---------- */
-.bar{
-  position:fixed;left:12px;right:12px;bottom:12px;z-index:70;
-  display:flex;gap:10px;align-items:center;padding:10px 10px 10px 18px;
-  border-radius:100px;background:rgba(19,19,22,.82);backdrop-filter:blur(18px) saturate(160%);
-  border:1px solid var(--line);box-shadow:0 18px 40px -18px rgba(0,0,0,.9);
-  transform:translateY(160%);transition:transform .55s cubic-bezier(.2,.8,.2,1);
-  padding-bottom:calc(10px + env(safe-area-inset-bottom));
-}
-.bar.show{transform:none}
-.bar .t{flex:1;min-width:0}
-.bar .t b{display:block;font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar .t small{font-size:11.5px;color:var(--muted)}
-.bar .btn{padding:13px 20px;font-size:14px;flex:none}
-@media(min-width:900px){.bar{display:none}}
-@media(max-width:899px){footer{padding-bottom:calc(150px + env(safe-area-inset-bottom))}.frow2{gap:12px}}
+@media(max-width:899px){.frow2{gap:12px}}
 
 /* progress */
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:80;width:0;transition:width .12s linear}
@@ -337,10 +322,10 @@ footer a:hover{color:var(--accent)}
     <div class="eyebrow fade-up">За строителни и ремонтни фирми</div>
     <h1>
       <span class="ln"><span>Сайт, който</span></span>
-      <span class="ln"><span>носи <em style="font-style:normal" class="acc">обаждания</em>.</span></span>
-      <span class="ln"><span>Не просто визитка.</span></span>
+      <span class="ln"><span>ви представя</span></span>
+      <span class="ln"><span><em style="font-style:normal" class="acc">както трябва.</em></span></span>
     </h1>
-    <p class="lead hero-sub fade-up d1">Един пакет. Ние правим сайта, хостваме го, поддържаме го и го променяме винаги, когато поискате. Плюс SEO и чатбот, който отговаря на клиентите и ги води до вашия телефон.</p>
+    <p class="lead hero-sub fade-up d1">Един пакет. Ние правим сайта, хостваме го, поддържаме го и го променяме винаги, когато поискате. Плюс SEO настройка и чатбот за бърз първи отговор.</p>
     <div class="hero-cta fade-up d2">
       <a href="#kontakt" class="btn magnet">Искам такъв сайт <span class="arw">→</span></a>
       <a href="#kakvo" class="btn ghost magnet">Вижте какво включва</a>
@@ -366,7 +351,7 @@ footer a:hover{color:var(--accent)}
   <div class="wrap">
     <div class="eyebrow rv">Честно казано</div>
     <h2 class="rv" data-d="1" style="margin-top:18px">Работата ви е добра.<br>Сайтът ви - не.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:22px">В ремонтната ниша клиентът избира за 30 секунди. Отваря 3 сайта от Google, звъни на този, който изглежда сериозно. Обикновено проблемът не е в цената ви.</p>
+    <p class="lead rv" data-d="2" style="margin-top:22px">Когато човек сравнява няколко фирми, често се обажда на тази, която изглежда сериозно. Обикновено проблемът не е в цената ви.</p>
 
     <div class="prob">
       <div class="prob-item rv"><div class="n">01</div><div>
@@ -376,8 +361,8 @@ footer a:hover{color:var(--accent)}
         <h3>На телефон изглежда счупен</h3>
         <p>8 от 10 клиенти го отварят от телефона. Ако там текстът е дребен и бутонът за обаждане го няма - вече сте загубили човека.</p></div></div>
       <div class="prob-item rv" data-d="2"><div class="n">03</div><div>
-        <h3>Никой не ви намира в Google</h3>
-        <p>Има сайт, но го виждат само тези, на които сте дали линка. Търсенето „ремонт на покрив + град“ води при конкуренцията.</p></div></div>
+        <h3>Не личи ясно какво предлагате</h3>
+        <p>Има сайт, но услугите, районът и начинът за връзка не се виждат веднага. Човекът трябва да търси информацията сам.</p></div></div>
       <div class="prob-item rv" data-d="3"><div class="n">04</div><div>
         <h3>Запитванията идват, вие сте на обекта</h3>
         <p>Човек пише в 19:40, отговаряте на другия ден. Дотогава е взел друга оферта. Загубата е тиха, затова не се вижда.</p></div></div>
@@ -389,7 +374,7 @@ footer a:hover{color:var(--accent)}
 <section class="sec" id="kakvo">
   <div class="wrap">
     <div class="eyebrow rv">Един пакет, всичко вътре</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">Не купувате сайт.<br>Купувате готов канал за клиенти.</h2>
+    <h2 class="rv" data-d="1" style="margin-top:18px">Сайт, хостинг и поддръжка.<br>В един ясен пакет.</h2>
     <p class="lead rv" data-d="2" style="margin-top:22px">Няма отделни оферти за дизайн, хостинг, поддръжка и SEO. Всичко е в едно, с фиксирана месечна такса.</p>
 
     <div class="cards">
@@ -406,11 +391,11 @@ footer a:hover{color:var(--accent)}
         <p>Нова услуга, нови снимки от обект, друг телефон, друга цена - пишете ни и го правим. Без допълнително плащане, целогодишно.</p></div>
 
       <div class="card rv tilt" data-d="3"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
-        <h3>SEO, за да ви намират</h3>
-        <p>Настройваме страниците за реалните търсения във вашия град и ниша, плюс Google профил, за да излизате в картата.</p></div>
+        <h3>SEO настройка</h3>
+        <p>Подготвяме структурата и съдържанието на страниците според услугите и района, в който работите.</p></div>
 
       <div class="card rv tilt" data-d="4"><span class="tag">24/7</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></div>
-        <h3>Чатбот, който води до обаждане</h3>
+        <h3>Чатбот за първи отговор</h3>
         <p>Отговаря на въпросите за услуги, срокове и обхват на работа, събира данни за обекта и насочва човека към разговор с вас.</p></div>
 
       <div class="card rv tilt" data-d="5"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1"/><circle cx="10" cy="8" r="4"/><path d="M19 11v6M22 14h-6"/></svg></div>
@@ -426,7 +411,7 @@ footer a:hover{color:var(--accent)}
     <div>
       <div class="eyebrow rv">Чатботът</div>
       <h2 class="rv" data-d="1" style="margin-top:18px">Отговаря, докато сте на обекта.</h2>
-      <p class="lead rv" data-d="2" style="margin-top:20px">Повечето запитвания идват вечер и в почивните дни. Ботът поема разговора веднага, отсява любопитните и ви оставя реалния клиент - с телефон и описание на обекта.</p>
+      <p class="lead rv" data-d="2" style="margin-top:20px">Когато запитване дойде вечер или през почивните дни, ботът може да отговори веднага, да събере основните данни и да ги предаде за последващ разговор.</p>
       <ul class="chk rv" data-d="3">
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Обучен с вашите услуги, райони и начин на работа</li>
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Пита правилните неща: обект, квадратура, срок</li>
@@ -446,9 +431,9 @@ footer a:hover{color:var(--accent)}
             <div class="msg usr" data-t="0">Здравейте, сменяте ли дограма на къща?</div>
             <div class="msg bot" data-t="1">Да, работим с PVC и алуминий. За къща в кой град става въпрос?</div>
             <div class="msg usr" data-t="2">Пловдив, около 12 прозореца.</div>
-            <div class="msg bot" data-t="3">Отлично, покриваме Пловдив и областта. Правим безплатен оглед и замерване. Кога ви е удобно?</div>
-            <div class="msg usr" data-t="4">Може в събота сутрин.</div>
-            <div class="msg cta" data-t="5">📞 Записах: събота, 10:00 - Божидар ще потвърди с обаждане</div>
+            <div class="msg bot" data-t="3">Благодаря. За да предадем запитването, как се казвате и на кой номер да ви потърсим?</div>
+            <div class="msg usr" data-t="4">Иван Петров, 0888 123 456.</div>
+            <div class="msg cta" data-t="5">📞 Записах данните и уведомих Георги. Той ще потвърди с обаждане.</div>
           </div>
         </div>
       </div>
@@ -465,7 +450,7 @@ footer a:hover{color:var(--accent)}
 
     <div class="steps">
       <div class="step rv"><div class="num">01</div><h3>Разговор</h3><p>20 минути по телефона. Какво работите, къде, за какви клиенти и какво ви носи най-добри пари.</p></div>
-      <div class="step rv" data-d="1"><div class="num">02</div><h3>Материали</h3><p>Изпращате снимки от обекти и телефон. Ако нямате добри снимки, казваме точно какви да направите.</p></div>
+      <div class="step rv" data-d="1"><div class="num">02</div><h3>Материали</h3><p>Изпращате снимки от обекти и телефон.</p></div>
       <div class="step rv" data-d="2"><div class="num">03</div><h3>Изработка</h3><p>Ние пишем текстовете, правим дизайна, настройваме SEO и обучаваме чатбота. Показваме готов вариант.</p></div>
       <div class="step rv" data-d="3"><div class="num">04</div><h3>Пускаме и поддържаме</h3><p>Сайтът тръгва. Оттам нататък всяка промяна е с едно съобщение до нас.</p></div>
     </div>
@@ -489,7 +474,7 @@ footer a:hover{color:var(--accent)}
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Изработка на сайта и текстовете</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Хостинг, домейн и SSL сертификат</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Неограничени промени през цялата година</li>
-          <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> SEO настройка и Google профил на фирмата</li>
+          <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> SEO настройка на сайта</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Чатбот, обучен за вашата фирма</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Директна връзка с нас двамата</li>
         </ul>
@@ -500,7 +485,7 @@ footer a:hover{color:var(--accent)}
       <div class="side">
         <div class="note rv" data-d="2">
           <h3>Как да го сметнете</h3>
-          <p>В ремонтната ниша една поръчка рядко е под 1000 лв. Ако сайтът ви донесе <b style="color:var(--text)">един клиент годишно</b>, вече си е върнал парите. Всичко след това е печалба.</p>
+          <p>В ремонтната ниша една поръчка рядко е под 1000 лв. Преценете инвестицията спрямо стойността на услугите си и нуждите на вашия бизнес.</p>
         </div>
         <div class="note rv" data-d="3">
           <span class="big">≈ 1 €/ден</span>
@@ -533,7 +518,7 @@ footer a:hover{color:var(--accent)}
         <div class="avat">К</div>
         <h3>Калоян</h3>
         <div class="role">Техника, SEO и чатбот</div>
-        <p>Отговаря за скоростта, за това да ви намират в Google и за чатбота - да отговаря вярно и да води разговора до обаждане.</p>
+        <p>Отговаря за скоростта, SEO настройката и чатбота - да отговаря вярно и да предава основните данни за запитването.</p>
       </div>
     </div>
   </div>
@@ -546,12 +531,12 @@ footer a:hover{color:var(--accent)}
     <h2 class="rv" data-d="1" style="margin-top:18px">Това, което обикновено питат.</h2>
 
     <div class="faq">
-      <div class="q rv"><button>А ако вече имам сайт?<span class="pm"></span></button><div class="ans"><p>Тогава го заменяме с нов и прехвърляме домейна ви, за да не губите нищо от Google. Ако старият сайт има работещи страници, ги пренасяме.</p></div></div>
+      <div class="q rv"><button>А ако вече имам сайт?<span class="pm"></span></button><div class="ans"><p>Тогава го заменяме с нов и прехвърляме домейна ви. Ако старият сайт има работещи страници, ги пренасяме.</p></div></div>
       <div class="q rv"><button>Колко време ми отнема на мен?<span class="pm"></span></button><div class="ans"><p>Около 40 минути общо: един разговор от 20 минути и изпращане на снимки и телефон. Текстовете пишем ние, вие само потвърждавате.</p></div></div>
       <div class="q rv"><button>Наистина ли промените са без лимит?<span class="pm"></span></button><div class="ans"><p>Да, за съдържанието на сайта: текстове, снимки, цени, услуги, секции, контакти. Ако поискате нещо голямо и напълно ново, ще ви кажем честно преди да започнем.</p></div></div>
       <div class="q rv"><button>Чий е сайтът и домейнът?<span class="pm"></span></button><div class="ans"><p>Ваши са. Ако някога решите да спрете, домейнът остава при вас и ви даваме съдържанието на сайта.</p></div></div>
       <div class="q rv"><button>Работите ли извън София?<span class="pm"></span></button><div class="ans"><p>Да, в цялата страна. Работим онлайн и по телефона, така че няма значение къде е фирмата ви.</p></div></div>
-      <div class="q rv"><button>Гарантирате ли ми клиенти?<span class="pm"></span></button><div class="ans"><p>Не. Никой честен човек не може да гарантира това. Гарантираме сайт, който изглежда сериозно, зарежда бързо, намира се в Google и не изпуска запитвания. Останалото зависи от работата ви и от търсенето във вашия район.</p></div></div>
+      <div class="q rv"><button>Гарантирате ли ми клиенти?<span class="pm"></span></button><div class="ans"><p>Не. Никой честен човек не може да гарантира клиенти, позиции в търсачките или конкретен бизнес резултат. Правим ясен, бърз и удобен за ползване сайт; останалото зависи от услугите ви, пазара и търсенето във вашия район.</p></div></div>
     </div>
   </div>
 </section>
@@ -593,12 +578,6 @@ footer a:hover{color:var(--accent)}
   </div>
 </footer>
 
-<!-- STICKY MOBILE BAR -->
-<div class="bar" id="bar">
-  <div class="t"><b>690 € + 29 €/мес.</b><small>Всичко включено</small></div>
-  <a href="#kontakt" class="btn">Разговор</a>
-</div>
-
 <script>
 (function(){
   var reduce = false;
@@ -612,7 +591,7 @@ footer a:hover{color:var(--accent)}
 
   /* scroll: header, progress, sticky bar, parallax grid */
   var hdr = document.getElementById('hdr'), prog = document.getElementById('prog'),
-      bar = document.getElementById('bar'), gridbg = document.getElementById('gridbg'),
+      gridbg = document.getElementById('gridbg'),
       hero = document.querySelector('.hero'), ticking = false;
 
   function onScroll(){
@@ -620,7 +599,6 @@ footer a:hover{color:var(--accent)}
     hdr.classList.toggle('stuck', y > 20);
     var h = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
-    bar.classList.toggle('show', y > window.innerHeight * 0.75);
     if(!reduce && gridbg && y < window.innerHeight * 1.4){
       gridbg.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
     }
