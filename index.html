@@ -256,10 +256,8 @@ ul{margin:0;padding:0}
 .q .ans p{color:var(--muted);font-size:15.5px;padding:0 0 24px;max-width:70ch}
 
 /* ---------- cta / form ---------- */
-.cta-sec{position:relative;overflow:hidden}
-.cta-box{position:relative;border-radius:28px;padding:clamp(30px,5vw,58px);background:linear-gradient(150deg,#16161B,#0D0D10);border:1px solid var(--line);overflow:hidden}
-.cta-box .glow.c{width:min(70vw,560px);aspect-ratio:1;background:radial-gradient(circle,rgba(255,91,46,.34),transparent 62%);top:-40%;right:-10%;opacity:.8}
-.cta-box > *{position:relative;z-index:1}
+.cta-sec{position:relative}
+.cta-box{position:relative;padding:0}
 form{display:grid;gap:12px;margin-top:30px}
 @media(min-width:760px){.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}}
 .fld{position:relative}
@@ -546,7 +544,6 @@ footer a:hover{color:var(--accent)}
 <section class="sec cta-sec" id="kontakt">
   <div class="wrap">
     <div class="cta-box rv">
-      <div class="glow c"></div>
       <div class="eyebrow">Следваща стъпка</div>
       <h2 style="margin-top:18px;max-width:16ch">Кажете ни с какво се занимавате.</h2>
       <p class="lead" style="margin-top:20px">Оставете контакт и ще се чуем в рамките на един работен ден. Разговорът е кратък и без продаване - казваме ви директно дали има смисъл за вашата фирма.</p>
