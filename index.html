@@ -117,7 +117,7 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:34px;font-size:13.5px;color:var(--muted)}
 .hero-meta span{display:flex;align-items:center;gap:8px}
 .trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-size:14px;font-weight:700;color:var(--text)}
-.trust-avatars{display:flex;padding-left:8px}.trust-avatars i{width:31px;height:31px;margin-left:-8px;border:2px solid var(--bg);border-radius:50%;background:linear-gradient(135deg,#F3F1EC,#74717B);display:block}.trust-avatars i:nth-child(2){background:linear-gradient(135deg,#FF5B2E,#8E2D18)}.trust-avatars i:nth-child(3){background:linear-gradient(135deg,#D8FF44,#425013)}.trust-avatars i:nth-child(4){background:linear-gradient(135deg,#6951E8,#18163F)}.trust-stars{color:#FFD84A;letter-spacing:.08em;font-size:17px}
+.trust-avatars{display:flex;padding-left:8px}.trust-avatars img{width:34px;height:34px;margin-left:-8px;border:2px solid var(--bg);border-radius:50%;object-fit:cover;display:block}.trust-stars{color:#FFD84A;letter-spacing:.08em;font-size:17px}
 .tick{width:16px;height:16px;flex:none;border-radius:50%;background:rgba(216,255,68,.14);display:grid;place-items:center}
 .tick svg{width:9px;height:9px;stroke:var(--accent-2);stroke-width:3;fill:none}
 .scrollcue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:none}
@@ -126,11 +126,11 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 @media(min-width:900px){.scrollcue{display:block}}
 
 /* ---------- marquee ---------- */
-.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);padding:16px 0;overflow:hidden;position:relative;z-index:3}
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);padding:22px 0;overflow:hidden;position:relative;z-index:3}
 .marq-track{display:flex;gap:40px;width:max-content;animation:slide 32s linear infinite}
 .marq:hover .marq-track{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(-50%)}}
-.marq-track span{font-family:Unbounded;font-weight:600;font-size:clamp(13px,1.6vw,17px);letter-spacing:-.01em;color:var(--muted);display:flex;align-items:center;gap:40px;white-space:nowrap}
+.marq-track span{font-family:Unbounded;font-weight:600;font-size:clamp(16px,2vw,21px);letter-spacing:-.01em;color:var(--muted);display:flex;align-items:center;gap:48px;white-space:nowrap}
 .marq-track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
 
 /* ---------- reveal ---------- */
@@ -340,12 +340,7 @@ footer a:hover{color:var(--accent)}
     <div class="hero-cta fade-up d2">
       <a href="#kakvo" class="btn magnet hero-primary">Виж какво включва <span class="arw">→</span></a>
     </div>
-    <div class="trust fade-up d3"><span>Доверен от</span><span class="trust-avatars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>37 бизнеса</span><span class="trust-stars" aria-label="5 от 5 звезди">★★★★★</span></div>
-    <div class="hero-meta fade-up d3">
-      <span><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> 690 € еднократно + 29 €/мес.</span>
-      <span><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Без скрити такси</span>
-      <span><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Готов за 14 дни</span>
-    </div>
+    <div class="trust fade-up d3"><span>Доверен от</span><span class="trust-avatars" aria-hidden="true"><img src="assets/trust/1.webp" alt=""><img src="assets/trust/2.webp" alt=""><img src="assets/trust/3.webp" alt=""><img src="assets/trust/4.webp" alt=""><img src="assets/trust/5.webp" alt=""></span><span>37 бизнеса</span><span class="trust-stars" aria-label="5 от 5 звезди">★★★★★</span></div>
   </div>
   <div class="scrollcue">Скрол<i></i></div>
 </section>
