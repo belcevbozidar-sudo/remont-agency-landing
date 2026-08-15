@@ -86,7 +86,7 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 @media(min-width:900px){.navlinks{display:flex}.nav .btn{display:inline-flex}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:96px;padding-bottom:clamp(40px,8vw,90px);overflow:hidden}
+.hero{position:relative;min-height:92svh;display:flex;align-items:center;padding-top:96px;padding-bottom:clamp(26px,5vw,54px);overflow:hidden}
 .grid-bg{position:absolute;inset:-20% -10%;z-index:0;
   background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
   background-size:64px 64px;opacity:.55;
@@ -118,6 +118,7 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:34px;font-size:13.5px;color:var(--muted)}
 .hero-meta span{display:flex;align-items:center;gap:8px}
 .trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-size:14px;font-weight:700;color:var(--text)}
+.hero .eyebrow + .trust{margin-top:13px}
 .trust-avatars{display:flex;padding-left:8px}.trust-avatars img{width:34px;height:34px;margin-left:-8px;border:2px solid var(--bg);border-radius:50%;object-fit:cover;display:block}.trust-stars{color:#FFD84A;letter-spacing:.08em;font-size:17px}
 .tick{width:16px;height:16px;flex:none;border-radius:50%;background:rgba(216,255,68,.14);display:grid;place-items:center}
 .tick svg{width:9px;height:9px;stroke:var(--accent-2);stroke-width:3;fill:none}
@@ -128,10 +129,10 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 
 /* ---------- marquee ---------- */
 .marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);padding:22px 0;overflow:hidden;position:relative;z-index:3}
-.marq-track{display:flex;gap:40px;width:max-content;animation:slide 32s linear infinite}
+.marq-track{display:flex;gap:0;width:max-content;animation:slide 32s linear infinite;will-change:transform}
 .marq:hover .marq-track{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(-50%)}}
-.marq-track span{font-family:Unbounded;font-weight:600;font-size:clamp(16px,2vw,21px);letter-spacing:-.01em;color:var(--muted);display:flex;align-items:center;gap:48px;white-space:nowrap}
+.marq-track span{font-family:Unbounded;font-weight:600;font-size:clamp(16px,2vw,21px);letter-spacing:-.01em;color:var(--muted);display:flex;align-items:center;gap:48px;padding-right:88px;white-space:nowrap}
 .marq-track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
 
 /* ---------- reveal ---------- */
@@ -332,6 +333,7 @@ footer a:hover{color:var(--accent)}
   <div class="glow b"></div>
   <div class="wrap">
     <div class="eyebrow fade-up">За строителни и ремонтни фирми</div>
+    <div class="trust fade-up d1"><span>Доверен от</span><span class="trust-avatars" aria-hidden="true"><img src="assets/trust/1.webp" alt=""><img src="assets/trust/2.webp" alt=""><img src="assets/trust/3.webp" alt=""><img src="assets/trust/4.webp" alt=""><img src="assets/trust/5.webp" alt=""></span><span>37 бизнеса</span><span class="trust-stars" aria-label="5 от 5 звезди">★★★★★</span></div>
     <h1>
       <span class="ln"><span>Сайт, който</span></span>
       <span class="ln"><span>те представя</span></span>
@@ -341,7 +343,6 @@ footer a:hover{color:var(--accent)}
     <div class="hero-cta fade-up d2">
       <a href="#kakvo" class="btn magnet hero-primary">Виж какво включва <span class="arw">→</span></a>
     </div>
-    <div class="trust fade-up d3"><span>Доверен от</span><span class="trust-avatars" aria-hidden="true"><img src="assets/trust/1.webp" alt=""><img src="assets/trust/2.webp" alt=""><img src="assets/trust/3.webp" alt=""><img src="assets/trust/4.webp" alt=""><img src="assets/trust/5.webp" alt=""></span><span>37 бизнеса</span><span class="trust-stars" aria-label="5 от 5 звезди">★★★★★</span></div>
   </div>
   <div class="scrollcue">Скрол<i></i></div>
 </section>
