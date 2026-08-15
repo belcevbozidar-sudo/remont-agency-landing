@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Сайт, който носи обаждания — за ремонтни и строителни фирми</title>
+<title>Сайт, който носи обаждания - за ремонтни и строителни фирми</title>
 <meta name="description" content="Цялостен пакет: сайт на световно ниво, хостинг, поддръжка без лимит, SEO и чатбот, който води клиента до обаждане. 690 € еднократно + 29 €/месец.">
 <meta name="theme-color" content="#0B0B0C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,11 +74,9 @@ h3{font-size:clamp(19px,2.2vw,25px);letter-spacing:-.02em}
 header{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
 header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(160%);border-bottom-color:var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
-.logo{display:flex;align-items:center;gap:10px;font-family:Unbounded;font-weight:800;font-size:15px;letter-spacing:-.02em}
-.logo .mark{width:26px;height:26px;border-radius:8px;background:var(--accent);position:relative;overflow:hidden;flex:none}
-.logo .mark::before,.logo .mark::after{content:"";position:absolute;background:#0B0B0C}
-.logo .mark::before{left:5px;top:5px;width:16px;height:4px;border-radius:2px}
-.logo .mark::after{left:5px;top:13px;width:9px;height:4px;border-radius:2px}
+.logo{display:inline-flex;align-items:center}
+.logo img{display:block;width:138px;height:auto}
+@media(max-width:480px){.logo img{width:122px}}
 .navlinks{display:none;gap:30px;font-size:14px;font-weight:600;color:var(--muted)}
 .navlinks a{position:relative;padding:4px 0;transition:color .3s}
 .navlinks a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--accent);transition:width .35s cubic-bezier(.2,.8,.2,1)}
@@ -277,6 +275,15 @@ form{display:grid;gap:12px;margin-top:30px}
 .fine{font-size:12.5px;color:#6E6C76;margin-top:4px}
 .thanks{display:none;padding:22px;border-radius:14px;background:rgba(216,255,68,.09);border:1px solid rgba(216,255,68,.25);color:var(--accent-2);font-weight:600;margin-top:18px}
 
+/* ---------- contact modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.7);backdrop-filter:blur(9px);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s}
+.modal.open{opacity:1;visibility:visible}
+.modal-card{position:relative;width:min(100%,570px);max-height:min(760px,calc(100svh - 40px));overflow:auto;padding:clamp(28px,5vw,46px);border:1px solid var(--line);border-radius:26px;background:linear-gradient(150deg,#19191E,#0D0D10);box-shadow:0 30px 90px rgba(0,0,0,.55);transform:translateY(14px) scale(.98);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.modal.open .modal-card{transform:none}
+.modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-size:26px;line-height:1;color:var(--text);transition:background .2s,border-color .2s}
+.modal-close:hover{background:var(--accent);border-color:var(--accent)}
+body.modal-open{overflow:hidden}
+
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:46px 0 calc(46px + env(safe-area-inset-bottom));font-size:14px;color:var(--muted)}
 .frow2{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
@@ -302,12 +309,6 @@ footer a:hover{color:var(--accent)}
 /* progress */
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:80;width:0;transition:width .12s linear}
 
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .rv{opacity:1;transform:none}
-  .hero h1 .ln > span{transform:none}
-  .fade-up{opacity:1;transform:none}
-}
 </style>
 </head>
 <body>
@@ -316,7 +317,7 @@ footer a:hover{color:var(--accent)}
 
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#top" class="logo"><span class="mark"></span> Studio 9</a>
+    <a href="#top" class="logo" aria-label="Studio 9"><img src="assets/studio9-logo.png" alt="Studio 9"></a>
     <nav class="navlinks">
       <a href="#kakvo">Какво включва</a>
       <a href="#kak">Как работим</a>
@@ -364,7 +365,7 @@ footer a:hover{color:var(--accent)}
 <section class="sec light" id="problem">
   <div class="wrap">
     <div class="eyebrow rv">Честно казано</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">Работата ви е добра.<br>Сайтът ви — не.</h2>
+    <h2 class="rv" data-d="1" style="margin-top:18px">Работата ви е добра.<br>Сайтът ви - не.</h2>
     <p class="lead rv" data-d="2" style="margin-top:22px">В ремонтната ниша клиентът избира за 30 секунди. Отваря 3 сайта от Google, звъни на този, който изглежда сериозно. Обикновено проблемът не е в цената ви.</p>
 
     <div class="prob">
@@ -373,7 +374,7 @@ footer a:hover{color:var(--accent)}
         <p>Направен веднъж, платен веднъж, забравен. Всяка малка промяна опира до човек, който вече не вдига телефона.</p></div></div>
       <div class="prob-item rv" data-d="1"><div class="n">02</div><div>
         <h3>На телефон изглежда счупен</h3>
-        <p>8 от 10 клиенти го отварят от телефона. Ако там текстът е дребен и бутонът за обаждане го няма — вече сте загубили човека.</p></div></div>
+        <p>8 от 10 клиенти го отварят от телефона. Ако там текстът е дребен и бутонът за обаждане го няма - вече сте загубили човека.</p></div></div>
       <div class="prob-item rv" data-d="2"><div class="n">03</div><div>
         <h3>Никой не ви намира в Google</h3>
         <p>Има сайт, но го виждат само тези, на които сте дали линка. Търсенето „ремонт на покрив + град“ води при конкуренцията.</p></div></div>
@@ -402,7 +403,7 @@ footer a:hover{color:var(--accent)}
 
       <div class="card rv tilt" data-d="2"><span class="tag">Без лимит</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3l7 7-9 9H5v-7z"/><path d="M12 5l7 7"/></svg></div>
         <h3>Промени по всяко време</h3>
-        <p>Нова услуга, нови снимки от обект, друг телефон, друга цена — пишете ни и го правим. Без допълнително плащане, целогодишно.</p></div>
+        <p>Нова услуга, нови снимки от обект, друг телефон, друга цена - пишете ни и го правим. Без допълнително плащане, целогодишно.</p></div>
 
       <div class="card rv tilt" data-d="3"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
         <h3>SEO, за да ви намират</h3>
@@ -414,7 +415,7 @@ footer a:hover{color:var(--accent)}
 
       <div class="card rv tilt" data-d="5"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1"/><circle cx="10" cy="8" r="4"/><path d="M19 11v6M22 14h-6"/></svg></div>
         <h3>Двама души, не служба „поддръжка“</h3>
-        <p>Пишете директно на нас — Божидар и Калоян. Без тикети, без чакане и без да обяснявате всеки път отначало кои сте.</p></div>
+        <p>Пишете директно на нас - Божидар и Калоян. Без тикети, без чакане и без да обяснявате всеки път отначало кои сте.</p></div>
     </div>
   </div>
 </section>
@@ -425,12 +426,12 @@ footer a:hover{color:var(--accent)}
     <div>
       <div class="eyebrow rv">Чатботът</div>
       <h2 class="rv" data-d="1" style="margin-top:18px">Отговаря, докато сте на обекта.</h2>
-      <p class="lead rv" data-d="2" style="margin-top:20px">Повечето запитвания идват вечер и в почивните дни. Ботът поема разговора веднага, отсява любопитните и ви оставя реалния клиент — с телефон и описание на обекта.</p>
+      <p class="lead rv" data-d="2" style="margin-top:20px">Повечето запитвания идват вечер и в почивните дни. Ботът поема разговора веднага, отсява любопитните и ви оставя реалния клиент - с телефон и описание на обекта.</p>
       <ul class="chk rv" data-d="3">
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Обучен с вашите услуги, райони и начин на работа</li>
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Пита правилните неща: обект, квадратура, срок</li>
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Насочва към обаждане или оставя контакт за вас</li>
-        <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Не измисля цени — казва това, което сте определили</li>
+        <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Не измисля цени - казва това, което сте определили</li>
       </ul>
     </div>
 
@@ -447,7 +448,7 @@ footer a:hover{color:var(--accent)}
             <div class="msg usr" data-t="2">Пловдив, около 12 прозореца.</div>
             <div class="msg bot" data-t="3">Отлично, покриваме Пловдив и областта. Правим безплатен оглед и замерване. Кога ви е удобно?</div>
             <div class="msg usr" data-t="4">Може в събота сутрин.</div>
-            <div class="msg cta" data-t="5">📞 Записах: събота, 10:00 — Божидар ще потвърди с обаждане</div>
+            <div class="msg cta" data-t="5">📞 Записах: събота, 10:00 - Божидар ще потвърди с обаждане</div>
           </div>
         </div>
       </div>
@@ -459,7 +460,7 @@ footer a:hover{color:var(--accent)}
 <section class="sec" id="kak">
   <div class="wrap">
     <div class="eyebrow rv">Как работим</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">От разговора до готовия сайт — 14 дни.</h2>
+    <h2 class="rv" data-d="1" style="margin-top:18px">От разговора до готовия сайт - 14 дни.</h2>
     <p class="lead rv" data-d="2" style="margin-top:20px">Вашата работа е около 40 минути общо. Останалото е при нас.</p>
 
     <div class="steps">
@@ -503,7 +504,7 @@ footer a:hover{color:var(--accent)}
         </div>
         <div class="note rv" data-d="3">
           <span class="big">≈ 1 €/ден</span>
-          <p>Толкова излиза месечната такса. За сравнение — един ден работа на обект струва в пъти повече.</p>
+          <p>Толкова излиза месечната такса. За сравнение - един ден работа на обект струва в пъти повече.</p>
         </div>
         <div class="note rv" data-d="4">
           <h3>Какво НЕ доплащате</h3>
@@ -519,7 +520,7 @@ footer a:hover{color:var(--accent)}
   <div class="wrap">
     <div class="eyebrow rv">Кои сме ние</div>
     <h2 class="rv" data-d="1" style="margin-top:18px">Двама души.<br>Вдигаме телефона.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:22px">Няма акаунт мениджър, няма отдел. Работите директно с хората, които правят сайта ви — и ще ги познавате по име и след третата година.</p>
+    <p class="lead rv" data-d="2" style="margin-top:22px">Няма акаунт мениджър, няма отдел. Работите директно с хората, които правят сайта ви - и ще ги познавате по име и след третата година.</p>
 
     <div class="f-grid">
       <div class="fcard rv" data-d="1">
@@ -532,7 +533,7 @@ footer a:hover{color:var(--accent)}
         <div class="avat">К</div>
         <h3>Калоян</h3>
         <div class="role">Техника, SEO и чатбот</div>
-        <p>Отговаря за скоростта, за това да ви намират в Google и за чатбота — да отговаря вярно и да води разговора до обаждане.</p>
+        <p>Отговаря за скоростта, за това да ви намират в Google и за чатбота - да отговаря вярно и да води разговора до обаждане.</p>
       </div>
     </div>
   </div>
@@ -562,34 +563,31 @@ footer a:hover{color:var(--accent)}
       <div class="glow c"></div>
       <div class="eyebrow">Следваща стъпка</div>
       <h2 style="margin-top:18px;max-width:16ch">Кажете ни с какво се занимавате.</h2>
-      <p class="lead" style="margin-top:20px">Оставете контакт и ще се чуем в рамките на един работен ден. Разговорът е кратък и без продаване — казваме ви директно дали има смисъл за вашата фирма.</p>
-
-      <form id="frm" novalidate>
-        <div class="frow">
-          <div class="fld"><input type="text" name="name" placeholder="Име" required></div>
-          <div class="fld"><input type="tel" name="phone" placeholder="Телефон" required></div>
-        </div>
-        <div class="frow">
-          <div class="fld"><input type="text" name="firm" placeholder="Фирма / дейност"></div>
-          <div class="fld"><select name="nisha">
-            <option value="">Ниша</option>
-            <option>Строителство</option><option>Ремонти на жилища</option><option>Дограма</option>
-            <option>Соларни системи</option><option>ВиК</option><option>Електро услуги</option>
-            <option>Покриви</option><option>Топлоизолация</option><option>Друго</option>
-          </select></div>
-        </div>
-        <div class="fld"><textarea name="msg" placeholder="Накратко: какво работите и в кой район (по избор)"></textarea></div>
-        <button type="submit" class="btn magnet" style="justify-self:start">Изпрати <span class="arw">→</span></button>
-        <p class="fine">Не изпращаме реклами. Данните ви се използват само за да се свържем с вас.</p>
-      </form>
-      <div class="thanks" id="thx">Благодарим. Получихме запитването и ще се чуем до един работен ден.</div>
+      <p class="lead" style="margin-top:20px">Оставете контакт и ще се чуем в рамките на един работен ден. Разговорът е кратък и без продаване - казваме ви директно дали има смисъл за вашата фирма.</p>
+      <a href="#kontakt" class="btn magnet" style="margin-top:30px">Запазете разговор <span class="arw">→</span></a>
     </div>
   </div>
 </section>
 
+<div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal-card">
+    <button class="modal-close" type="button" aria-label="Затвори">×</button>
+    <div class="eyebrow">Следваща стъпка</div>
+    <h2 id="contactTitle" style="margin-top:18px;font-size:clamp(27px,5vw,43px)">Кажете ни с какво се занимавате.</h2>
+    <p class="lead" style="margin-top:18px">Оставете телефон и кратко описание. Ще се чуем в рамките на един работен ден.</p>
+    <form id="frm" novalidate>
+      <div class="fld"><input type="tel" name="phone" placeholder="Телефон" autocomplete="tel" required></div>
+      <div class="fld"><textarea name="business" placeholder="С какво точно се занимава бизнесът ви?" required></textarea></div>
+      <button type="submit" class="btn magnet" style="justify-self:start">Изпрати <span class="arw">→</span></button>
+      <p class="fine">Не изпращаме реклами. Данните ви се използват само за да се свържем с вас.</p>
+    </form>
+    <div class="thanks" id="thx">Благодарим. Получихме запитването и ще се чуем до един работен ден.</div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap frow2">
-    <a href="#top" class="logo" style="font-size:14px"><span class="mark"></span> Studio 9</a>
+    <a href="#top" class="logo" aria-label="Studio 9"><img src="assets/studio9-logo.png" alt="Studio 9"></a>
     <div>Сайтове за строителни и ремонтни фирми</div>
     <div>© <span id="yr"></span> · Божидар &amp; Калоян</div>
   </div>
@@ -603,7 +601,7 @@ footer a:hover{color:var(--accent)}
 
 <script>
 (function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = false;
   var desktop = window.matchMedia('(min-width: 900px)').matches;
 
   document.getElementById('yr').textContent = new Date().getFullYear();
@@ -633,11 +631,16 @@ footer a:hover{color:var(--accent)}
   }, {passive:true});
   onScroll();
 
-  /* reveal on scroll */
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  /* reveal on scroll - use a generous threshold and a safe fallback for desktop browsers */
+  var reveal = function(el){ el.classList.add('in'); };
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+    }, {threshold:0.04, rootMargin:'0px 0px -4% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.rv').forEach(reveal);
+  }
 
   /* card cursor glow (desktop only) */
   if(desktop && !reduce){
@@ -672,13 +675,7 @@ footer a:hover{color:var(--accent)}
     if(reduce){ items.forEach(function(el){ el.classList.add('show'); }); return; }
     var i = 0;
     function next(){
-      if(i >= items.length){ 
-        setTimeout(function(){
-          items.forEach(function(el){ el.classList.remove('show'); });
-          played = false; setTimeout(playChat, 900);
-        }, 5200);
-        return;
-      }
+      if(i >= items.length) return;
       var el = items[i];
       var isBot = el.classList.contains('bot') || el.classList.contains('cta');
       if(isBot){
@@ -695,9 +692,16 @@ footer a:hover{color:var(--accent)}
     }
     setTimeout(next, 300);
   }
-  new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting) playChat(); });
-  }, {threshold:0.4}).observe(msgs);
+  if('IntersectionObserver' in window){
+    var chatObserver = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ playChat(); chatObserver.unobserve(e.target); }
+      });
+    }, {threshold:0.55});
+    chatObserver.observe(msgs);
+  } else {
+    playChat();
+  }
 
   /* FAQ accordion */
   document.querySelectorAll('.q').forEach(function(q){
@@ -715,12 +719,32 @@ footer a:hover{color:var(--accent)}
     if(o){ var a = o.querySelector('.ans'); a.style.height = a.scrollHeight + 'px'; }
   });
 
+  /* contact popup */
+  var modal = document.getElementById('contactModal'), closeModal = modal.querySelector('.modal-close'),
+      frm = document.getElementById('frm'), thx = document.getElementById('thx'), lastTrigger;
+  function openModal(trigger){
+    lastTrigger = trigger;
+    modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    setTimeout(function(){ frm.elements.phone.focus(); }, 50);
+  }
+  function hideModal(){
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if(lastTrigger) lastTrigger.focus();
+  }
+  document.querySelectorAll('a[href="#kontakt"]').forEach(function(link){
+    link.addEventListener('click', function(e){ e.preventDefault(); openModal(link); });
+  });
+  closeModal.addEventListener('click', hideModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) hideModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) hideModal(); });
+
   /* form */
-  var frm = document.getElementById('frm'), thx = document.getElementById('thx');
   frm.addEventListener('submit', function(e){
     e.preventDefault();
     var ok = true;
-    ['name','phone'].forEach(function(n){
+    ['phone','business'].forEach(function(n){
       var f = frm.elements[n];
       if(!f.value.trim()){ ok = false; f.style.borderColor = '#FF5B2E'; }
       else { f.style.borderColor = ''; }
