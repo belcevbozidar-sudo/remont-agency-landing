@@ -4,15 +4,24 @@ module.exports = async function contactHandler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const phone = typeof req.body?.phone === 'string' ? req.body.phone.trim() : '';
+  const submittedPhone = typeof req.body?.phone === 'string' ? req.body.phone.trim() : '';
   const business = typeof req.body?.business === 'string' ? req.body.business.trim() : '';
+  const phone = normalizeBulgarianMobile(submittedPhone);
 
-  if (!phone || !business || phone.length > 60 || business.length > 2000) {
-    return res.status(400).json({ error: 'Попълни телефон и кратко описание на бизнеса.' });
+  if (!phone || !business || business.length > 2000) {
+    return res.status(400).json({ error: 'Въведи валиден български мобилен номер и кратко описание на бизнеса.' });
   }
 
-  const { CONVEX_URL, CONVEX_SUBMISSION_SECRET, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID } = process.env;
-  if (!CONVEX_URL || !CONVEX_SUBMISSION_SECRET || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+  const {
+    CONVEX_URL,
+    CONVEX_SUBMISSION_SECRET,
+    TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHAT_ID,
+    TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN,
+    TWILIO_SENDER_ID,
+  } = process.env;
+  if (!CONVEX_URL || !CONVEX_SUBMISSION_SECRET || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_SENDER_ID) {
     return res.status(500).json({ error: 'Формата временно не е настроена.' });
   }
 
@@ -43,6 +52,24 @@ module.exports = async function contactHandler(req, res) {
       throw new Error('Convex mutation failed');
     }
 
+    const smsBody = new URLSearchParams({
+      To: phone,
+      From: TWILIO_SENDER_ID,
+      Body: 'Благодарим Ви. Заявката е успешно получена и ще се свържем с Вас скоро.',
+    });
+    const twilioResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: smsBody.toString(),
+    });
+
+    if (!twilioResponse.ok) {
+      throw new Error('Twilio request failed');
+    }
+
     const telegramResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -62,3 +89,11 @@ module.exports = async function contactHandler(req, res) {
     return res.status(502).json({ error: 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.' });
   }
 };
+
+function normalizeBulgarianMobile(value) {
+  const compact = value.replace(/[\s().-]/g, '');
+  if (/^08\d{8}$/.test(compact)) return `+359${compact.slice(1)}`;
+  if (/^\+3598\d{8}$/.test(compact)) return compact;
+  if (/^3598\d{8}$/.test(compact)) return `+${compact}`;
+  return null;
+}
