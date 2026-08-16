@@ -50,10 +50,24 @@
     var banner = document.createElement('aside');
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', 'Настройки за бисквитки');
-    banner.style.cssText = 'position:fixed;z-index:120;right:16px;bottom:16px;width:min(440px,calc(100vw - 32px));padding:20px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:#17171B;color:#F6F5F2;box-shadow:0 22px 60px rgba(0,0,0,.35);font:500 14px/1.5 Manrope,Arial,sans-serif';
-    banner.innerHTML = '<strong style="display:block;font-size:16px;margin-bottom:6px">Бисквитки за измерване</strong><span style="display:block;color:#B8B6BF">Използваме Meta Pixel за измерване на рекламите. Можеш да приемеш или откажеш.</span><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button type="button" data-consent="rejected" style="padding:10px 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:transparent;color:#F6F5F2;font:700 13px Manrope,Arial,sans-serif;cursor:pointer">Отказвам</button><button type="button" data-consent="accepted" style="padding:10px 15px;border:0;border-radius:999px;background:#FF5B2E;color:#fff;font:700 13px Manrope,Arial,sans-serif;cursor:pointer">Приемам</button></div>';
+    banner.style.cssText = 'position:fixed;z-index:120;right:16px;bottom:16px;width:min(440px,calc(100vw - 32px));padding:20px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:#17171B;color:#F6F5F2;box-shadow:0 22px 60px rgba(0,0,0,.35);font:500 14px/1.5 Manrope,Arial,sans-serif;transition:transform .32s ease,padding .32s ease,width .32s ease';
+    banner.innerHTML = '<strong style="display:block;font-size:16px;margin-bottom:6px">Бисквитки за измерване</strong><span style="display:block;color:#B8B6BF">Използваме Meta Pixel за измерване на рекламите.</span><p data-cookie-details hidden style="margin:14px 0 0;color:#D3D0D8">Приемането позволява да измерваме посещенията и заявките от рекламите. Можеш да откажеш - сайтът ще работи нормално.</p><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px"><button type="button" data-consent="accepted" style="width:100%;padding:12px 15px;border:0;border-radius:999px;background:#FF5B2E;color:#fff;font:700 13px Manrope,Arial,sans-serif;cursor:pointer">Приемам</button><button type="button" data-action="learn-more" aria-expanded="false" style="width:100%;padding:12px 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:transparent;color:#F6F5F2;font:700 13px Manrope,Arial,sans-serif;cursor:pointer">Научи повече</button></div>';
     banner.addEventListener('click', function (event) {
-      var choice = event.target && event.target.getAttribute('data-consent');
+      var target = event.target;
+      if (!target) return;
+      if (target.getAttribute('data-action') === 'learn-more') {
+        var details = banner.querySelector('[data-cookie-details]');
+        details.hidden = false;
+        banner.style.padding = '24px';
+        banner.style.width = 'min(470px,calc(100vw - 32px))';
+        banner.style.transform = 'translateY(-14px)';
+        target.removeAttribute('data-action');
+        target.setAttribute('data-consent', 'rejected');
+        target.setAttribute('aria-expanded', 'true');
+        target.textContent = 'Отказвам';
+        return;
+      }
+      var choice = target.getAttribute('data-consent');
       if (!choice) return;
       saveConsent(choice);
       if (choice === 'accepted') enableTracking();
