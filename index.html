@@ -197,24 +197,17 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .laptop-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
 @media(max-width:560px){.moment{padding:88px 0 96px}.moment-head{margin-bottom:36px;padding:0 20px}.moment-head p{font-size:15.5px}.laptop-showcase{padding:0 8px;overflow:hidden}.laptop-stage{width:150%;max-width:none;margin-left:-25%}.laptop-screen{border-radius:6px 6px 4px 4px}}
 
-/* ---------- features ---------- */
-.cards{display:grid;gap:14px;margin-top:48px}
-@media(min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
-.card{
-  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-  padding:26px 24px 28px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
-}
-.card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,91,46,.16),transparent 62%)}
-.card:hover{transform:translateY(-5px);border-color:rgba(255,91,46,.42);background:var(--surface-2)}
-.card:hover::before{opacity:1}
-.card > *{position:relative}
-.ico{width:44px;height:44px;border-radius:13px;background:rgba(255,91,46,.12);border:1px solid rgba(255,91,46,.25);display:grid;place-items:center;margin-bottom:18px}
-.ico svg{width:21px;height:21px;stroke:var(--accent);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.card h3{margin-bottom:9px}
-.card p{color:var(--muted);font-size:15px}
-.card .tag{position:absolute;top:20px;right:20px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);background:rgba(216,255,68,.10);border:1px solid rgba(216,255,68,.22);padding:5px 9px;border-radius:100px}
+/* ---------- what's included ---------- */
+.included{background:#fff;color:#132238;padding:clamp(84px,10vw,132px) var(--pad)}
+.included-inner{max-width:1100px;margin:0 auto}
+.included-head{text-align:center;margin-bottom:80px}
+.included-head h2{font-family:Inter,Manrope,sans-serif;font-size:clamp(30px,4.6vw,58px);font-weight:700;letter-spacing:-.035em;line-height:1.05;color:#132238}
+.included-head p{font-family:Inter,Manrope,sans-serif;font-size:18px;line-height:1.5;color:#5f6b7a;max-width:38ch;margin:18px auto 0}
+.included-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:56px 36px}
+.included-item h3{font-family:Inter,Manrope,sans-serif;font-size:17px;font-weight:700;color:#132238;letter-spacing:-.01em;line-height:1.2;margin:0 0 10px;padding-top:16px;border-top:1px solid rgba(19,34,56,.12)}
+.included-item p{font-family:Inter,Manrope,sans-serif;font-size:14.5px;line-height:1.55;color:#5f6b7a;margin:0}
+@media(max-width:900px){.included-grid{grid-template-columns:repeat(2,1fr);gap:44px 32px}.included-head{margin-bottom:60px}}
+@media(max-width:560px){.included{padding:88px 20px 96px}.included-head{margin-bottom:48px}.included-head p{font-size:15.5px}.included-grid{gap:34px 22px}.included-item h3{font-size:14.5px;padding-top:13px;margin-bottom:7px}.included-item p{font-size:13px}}
 
 /* ---------- chatbot ---------- */
 .split{display:grid;gap:44px;align-items:center}
@@ -447,36 +440,20 @@ footer a:hover{color:var(--accent)}
 </section>
 
 <!-- WHAT'S INCLUDED -->
-<section class="sec" id="kakvo">
-  <div class="wrap">
-    <div class="eyebrow rv">Един пакет, всичко вътре</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">Сайт, хостинг и поддръжка.<br>В един ясен пакет.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:22px">Няма отделни оферти за дизайн, хостинг, поддръжка и SEO. Всичко е в едно, с фиксирана месечна такса.</p>
-
-    <div class="cards">
-      <div class="card rv tilt"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 5h18v12H3z"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h3>Сайт на световно ниво</h3>
-        <p>Дизайн, който изглежда като на голяма фирма. Бърз, чист, с ясни бутони за обаждане и запитване на всеки екран.</p></div>
-
-      <div class="card rv tilt" data-d="1"><div class="ico"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"/><rect x="3" y="12" width="18" height="8" rx="2"/><path d="M7 16h.01M11 16h.01"/></svg></div>
-        <h3>Хостинг и домейн</h3>
-        <p>Ние държим сайта онлайн, със сертификат и защита. Не се занимаваш с подновявания и „изтекъл хостинг“.</p></div>
-
-      <div class="card rv tilt" data-d="2"><span class="tag">Без лимит</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3l7 7-9 9H5v-7z"/><path d="M12 5l7 7"/></svg></div>
-        <h3>Промени по всяко време</h3>
-        <p>Нова услуга, нови снимки от обект, друг телефон, друга цена - пишеш ни и го правим. Без допълнително плащане, целогодишно.</p></div>
-
-      <div class="card rv tilt" data-d="3"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
-        <h3>SEO настройка</h3>
-        <p>Подготвяме структурата и съдържанието на страниците според услугите и района, в който работиш.</p></div>
-
-      <div class="card rv tilt" data-d="4"><span class="tag">24/7</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></div>
-        <h3>Чатбот за първи отговор</h3>
-        <p>Отговаря на въпросите за услуги, срокове и обхват на работа, събира данни за обекта и насочва човека към разговор с теб.</p></div>
-
-      <div class="card rv tilt" data-d="5"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1"/><circle cx="10" cy="8" r="4"/><path d="M19 11v6M22 14h-6"/></svg></div>
-        <h3>Директна връзка</h3>
-        <p>Пишеш директно на нас - хората, които ти правят и поддържат сайта.</p></div>
+<section class="included" id="kakvo">
+  <div class="included-inner">
+    <div class="included-head rv">
+      <h2>Цялостно решение и спокойствие за вашия бизнес</h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-item rv"><h3>Изработка на сайт</h3><p>Създаваме ясен и професионален сайт, изграден около услугите и работата ти.</p></div>
+      <div class="included-item rv" data-d="1"><h3>SEO настройка</h3><p>Подготвяме структурата и съдържанието според услугите и района, в който работиш.</p></div>
+      <div class="included-item rv" data-d="2"><h3>Чатбот</h3><p>Поема първите въпроси и събира данни за запитването, когато е нужно.</p></div>
+      <div class="included-item rv" data-d="3"><h3>Домейн</h3><p>Помагаме с избора и настройването на домейн за твоя сайт.</p></div>
+      <div class="included-item rv" data-d="4"><h3>Копирайтинг</h3><p>Посланията са подредени ясно и говорят директно на хората, които искаш да достигнеш.</p></div>
+      <div class="included-item rv" data-d="5"><h3>Хостинг и поддръжка</h3><p>Скорост, SSL, резервни копия и техническа грижа - наша отговорност.</p></div>
+      <div class="included-item rv" data-d="6"><h3>Неограничени редакции</h3><p>Пишеш ни какво да се промени и го правим, без допълнително заплащане.</p></div>
+      <div class="included-item rv" data-d="7"><h3>Директна връзка</h3><p>Пишеш директно на нас - хората, които правят и поддържат сайта ти.</p></div>
     </div>
   </div>
 </section>
