@@ -97,8 +97,10 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .glow{position:absolute;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none;opacity:.55}
 .glow.a{width:min(60vw,620px);aspect-ratio:1;background:radial-gradient(circle,rgba(255,91,46,.55),transparent 62%);top:-14%;right:-12%;animation:float1 16s ease-in-out infinite}
 .glow.b{width:min(52vw,520px);aspect-ratio:1;background:radial-gradient(circle,rgba(216,255,68,.20),transparent 62%);bottom:-20%;left:-14%;animation:float2 19s ease-in-out infinite}
+.glow.c{width:min(54vw,540px);aspect-ratio:1;background:radial-gradient(circle,rgba(255,91,46,.34),transparent 64%);top:43%;left:-14%;animation:float3 18s ease-in-out infinite}
 @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,45px)}}
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-35px)}}
+@keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(36px,-24px)}}
 .hero .wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
 .hero h1{margin:48px 0 0}
 .hero-title{font-family:Inter,sans-serif;font-size:clamp(42px,6.2vw,76px);line-height:1.05;font-weight:800;letter-spacing:-.015em;color:var(--text)}
@@ -114,8 +116,8 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .hero-sub{margin:30px auto 0;max-width:50ch}
 .hero-sub span+span::before{content:" "}
 @media(max-width:699px){
-  .hero{min-height:84svh;padding-top:88px;padding-bottom:28px}
-  .hero .wrap{transform:translateY(-30px)}
+  .hero{min-height:82svh;padding-top:88px;padding-bottom:28px}
+  .hero .wrap{transform:translateY(-42px)}
   .hero h1{margin-top:48px}
   .hero-title{font-size:clamp(30px,8.8vw,46px);line-height:1.06;letter-spacing:-.02em}
   .hero-title-desktop{display:block}
@@ -346,6 +348,7 @@ footer a:hover{color:var(--accent)}
   <div class="grid-bg" id="gridbg"></div>
   <div class="glow a"></div>
   <div class="glow b"></div>
+  <div class="glow c"></div>
   <div class="wrap">
     <div class="trust fade-up d1"><span>Доверен от</span><span class="trust-avatars" aria-hidden="true"><img src="assets/trust/1.webp" alt=""><img src="assets/trust/2.webp" alt=""><img src="assets/trust/3.webp" alt=""><img src="assets/trust/4.webp" alt=""><img src="assets/trust/5.webp" alt=""></span><span>37 бизнеса</span><span class="trust-stars" aria-label="5 от 5 звезди">★★★★★</span></div>
     <h1 class="hero-title" aria-label="Уебсайт, устроен за повече клиенти">
