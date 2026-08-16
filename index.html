@@ -164,6 +164,10 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .light .line{border-color:rgba(0,0,0,.10)}
 
 /* ---------- site check ---------- */
+.site-check-section{overflow:hidden;background:#0b0b0c}
+.site-check-section::before{content:"";position:absolute;inset:-22% -10%;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.5;mask-image:radial-gradient(110% 86% at 50% 20%,#000 10%,transparent 76%);-webkit-mask-image:radial-gradient(110% 86% at 50% 20%,#000 10%,transparent 76%)}
+.site-check-section::after{content:"";position:absolute;width:min(62vw,650px);aspect-ratio:1;border-radius:50%;top:-30%;right:-16%;background:radial-gradient(circle,rgba(255,91,46,.38),transparent 64%);filter:blur(78px);pointer-events:none;opacity:.75}
+.site-check-section .wrap{position:relative;z-index:1}
 .site-check{max-width:1040px;margin:0 auto}
 .site-check-title{font-family:Inter,Manrope,sans-serif;font-size:clamp(44px,7.2vw,86px);font-weight:800;letter-spacing:-.055em;line-height:.96;margin:17px 0 0}
 .site-check-title em{font-style:normal;color:var(--accent)}
@@ -176,8 +180,7 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .site-check-row p span{color:var(--muted);font-weight:500}
 .site-check-end{position:relative;margin:20px 0 0;padding:clamp(24px,4vw,38px);border-radius:24px;background:var(--accent);color:#fff;overflow:hidden}
 .site-check-end::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-76px;top:-165px;border:1px solid rgba(255,255,255,.28)}
-.site-check-end b{position:relative;display:block;font-family:Inter,Manrope,sans-serif;font-size:clamp(23px,3.1vw,37px);letter-spacing:-.045em;line-height:1.12;max-width:28ch}
-.site-check-end small{position:relative;display:block;margin-top:12px;font-size:15px;font-weight:600;color:rgba(255,255,255,.82)}
+.site-check-end b{position:relative;display:block;font-family:Inter,Manrope,sans-serif;font-size:clamp(28px,4vw,48px);letter-spacing:-.05em;line-height:1.06;max-width:22ch}
 @media(max-width:560px){.site-check-title{font-size:clamp(42px,12vw,60px)}.site-check-list{margin-top:30px;padding:10px 20px;border-radius:24px}.site-check-row{grid-template-columns:47px 1fr;gap:12px;padding:21px 0}.site-check-index{width:34px;height:34px;font-size:9px}.site-check-row p{font-size:21px}.site-check-end{margin-top:14px;border-radius:20px}.site-check-end b{font-size:25px}}
 
 /* ---------- laptop showcase ---------- */
@@ -396,7 +399,7 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <!-- PROBLEM -->
-<section class="sec light" id="problem">
+<section class="sec site-check-section" id="problem">
   <div class="wrap site-check">
     <div class="eyebrow rv">Бърза проверка</div>
     <h2 class="site-check-title rv" data-d="1">Ако сайтът ти...</h2>
@@ -404,13 +407,12 @@ footer a:hover{color:var(--accent)}
     <div class="site-check-list">
       <div class="site-check-row rv"><div class="site-check-index">01</div><p>е правен <span>през 2016-та.</span></p></div>
       <div class="site-check-row rv" data-d="1"><div class="site-check-index">02</div><p>или не изглежда <span>така, както искаш.</span></p></div>
-      <div class="site-check-row rv" data-d="2"><div class="site-check-index">03</div><p>или не говори директно <span>и хората не се припознават.</span></p></div>
-      <div class="site-check-row rv" data-d="3"><div class="site-check-index">04</div><p>или все още нямаш такъв, <span>а искаш професионална работа.</span></p></div>
+      <div class="site-check-row rv" data-d="2"><div class="site-check-index">03</div><p>или не говори директно <span>и хората не се обаждат.</span></p></div>
+      <div class="site-check-row rv" data-d="3"><div class="site-check-index">04</div><p>или все още нямаш такъв. <span>Но искаш да имаш професионално направен.</span></p></div>
     </div>
 
     <div class="site-check-end rv" data-d="4">
-      <b>Добрата работа заслужава сайт, който я показва както трябва.</b>
-      <small>Когато сайтът е ясен, хората разбират дали си точният човек за тях.</small>
+      <b>То виж какво можеш да получиш.</b>
     </div>
   </div>
 </section>
