@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 module.exports = async function contactHandler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -6,7 +8,10 @@ module.exports = async function contactHandler(req, res) {
 
   const submittedPhone = typeof req.body?.phone === 'string' ? req.body.phone.trim() : '';
   const business = typeof req.body?.business === 'string' ? req.body.business.trim() : '';
+  const submittedEventId = typeof req.body?.eventId === 'string' ? req.body.eventId.trim() : '';
+  const hasMarketingConsent = req.body?.hasMarketingConsent === true;
   const phone = normalizeBulgarianMobile(submittedPhone);
+  const eventId = /^[a-zA-Z0-9_-]{8,100}$/.test(submittedEventId) ? submittedEventId : crypto.randomUUID();
 
   if (!phone || !business || business.length > 2000) {
     return res.status(400).json({ error: 'Въведи валиден български мобилен номер и кратко описание на бизнеса.' });
@@ -21,6 +26,8 @@ module.exports = async function contactHandler(req, res) {
     TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN,
     TWILIO_SENDER_ID,
+    META_PIXEL_ID,
+    META_CAPI_ACCESS_TOKEN,
   } = process.env;
   if (!CONVEX_URL || !CONVEX_SUBMISSION_SECRET || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || !NTFY_TOPIC || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_SENDER_ID) {
     return res.status(500).json({ error: 'Формата временно не е настроена.' });
@@ -99,6 +106,15 @@ module.exports = async function contactHandler(req, res) {
       throw new Error('ntfy request failed');
     }
 
+    // Reporting must never prevent a valid enquiry from reaching the team.
+    if (hasMarketingConsent && META_PIXEL_ID && META_CAPI_ACCESS_TOKEN) {
+      try {
+        await sendMetaConversions(req, phone, eventId, META_PIXEL_ID, META_CAPI_ACCESS_TOKEN);
+      } catch (error) {
+        console.error('Meta Conversions API reporting failed', error);
+      }
+    }
+
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error('Contact form submission failed', error);
@@ -112,4 +128,37 @@ function normalizeBulgarianMobile(value) {
   if (/^\+3598\d{8}$/.test(compact)) return compact;
   if (/^3598\d{8}$/.test(compact)) return `+${compact}`;
   return null;
+}
+
+async function sendMetaConversions(req, phone, eventId, pixelId, accessToken) {
+  const eventTime = Math.floor(Date.now() / 1000);
+  const forwardedFor = req.headers['x-forwarded-for'];
+  const clientIp = typeof forwardedFor === 'string'
+    ? forwardedFor.split(',')[0].trim()
+    : req.socket?.remoteAddress;
+  const phoneHash = crypto.createHash('sha256').update(phone.replace(/\D/g, '')).digest('hex');
+  const userData = { ph: [phoneHash] };
+
+  if (clientIp) userData.client_ip_address = clientIp;
+  if (req.headers['user-agent']) userData.client_user_agent = req.headers['user-agent'];
+
+  const host = req.headers.host || 'remont-agency-landing.vercel.app';
+  const events = ['Contact', 'Lead', 'Purchase'].map((eventName) => ({
+    event_name: eventName,
+    event_time: eventTime,
+    event_id: `${eventId}-${eventName.toLowerCase()}`,
+    event_source_url: `https://${host}/thank-you`,
+    action_source: 'website',
+    user_data: userData,
+  }));
+
+  const response = await fetch(`https://graph.facebook.com/v23.0/${encodeURIComponent(pixelId)}/events?access_token=${encodeURIComponent(accessToken)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: events }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Meta Conversions API request failed (${response.status})`);
+  }
 }

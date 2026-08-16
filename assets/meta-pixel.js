@@ -24,7 +24,17 @@
 
   function trackPageEvents() {
     var events = (document.body.getAttribute('data-meta-events') || '').split(',').filter(Boolean);
-    events.forEach(function (eventName) { fbq('track', eventName); });
+    var eventId = null;
+    try { eventId = window.sessionStorage.getItem('studio9_meta_event_id'); }
+    catch (error) {}
+    events.forEach(function (eventName) {
+      if (eventId) fbq('track', eventName, {}, { eventID: eventId + '-' + eventName.toLowerCase() });
+      else fbq('track', eventName);
+    });
+    if (eventId) {
+      try { window.sessionStorage.removeItem('studio9_meta_event_id'); }
+      catch (error) {}
+    }
   }
 
   function enableTracking() {

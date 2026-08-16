@@ -743,10 +743,16 @@ footer a:hover{color:var(--accent)}
     submit.disabled = true;
     submit.textContent = 'Изпращаме...';
     try{
+      var eventId = window.crypto && window.crypto.randomUUID
+        ? window.crypto.randomUUID()
+        : 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+      var hasMarketingConsent = false;
+      try { hasMarketingConsent = window.localStorage.getItem('studio9_marketing_consent') === 'accepted'; } catch(storageError) {}
+      try { window.sessionStorage.setItem('studio9_meta_event_id', eventId); } catch(storageError) {}
       var response = await fetch('/api/contact', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim()})
+        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim(), eventId: eventId, hasMarketingConsent: hasMarketingConsent})
       });
       if(!response.ok) throw new Error('Submission failed');
       window.location.assign('/thank-you');
