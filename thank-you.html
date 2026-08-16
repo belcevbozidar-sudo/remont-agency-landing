@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Заявката е изпратена | Studio 9</title>
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0B0B0C;--text:#F6F5F2;--muted:#A9A7B0;--accent:#FF5B2E;--line:rgba(255,255,255,.08)}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:Manrope,Arial,sans-serif}
+    .page{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;padding:32px 20px}
+    .page::before{content:"";position:absolute;inset:-20%;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(70% 65% at 50% 48%,#000,transparent 78%);-webkit-mask-image:radial-gradient(70% 65% at 50% 48%,#000,transparent 78%)}
+    .glow{position:absolute;width:min(80vw,720px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,91,46,.24),transparent 66%);filter:blur(60px);top:16%;left:50%;transform:translateX(-50%);pointer-events:none}
+    .logo{position:absolute;top:30px;left:clamp(24px,6vw,70px);z-index:1}.logo img{width:138px;height:auto;display:block}
+    .content{position:relative;z-index:1;text-align:center;max-width:650px;animation:appear .75s cubic-bezier(.16,1,.3,1) both}
+    .check{width:112px;height:112px;margin:0 auto 34px;border-radius:50%;display:grid;place-items:center;background:rgba(216,255,68,.1);border:1px solid rgba(216,255,68,.34);box-shadow:0 0 0 12px rgba(216,255,68,.035),0 22px 50px -26px rgba(216,255,68,.55)}
+    .check svg{width:52px;height:52px;fill:none;stroke:#D8FF44;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}.check path{stroke-dasharray:70;stroke-dashoffset:70;animation:draw .6s .42s cubic-bezier(.65,0,.35,1) forwards}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(255,91,46,.18)}
+    h1{font-family:Unbounded,Arial,sans-serif;font-weight:800;letter-spacing:-.055em;font-size:clamp(31px,6vw,60px);line-height:1.04;margin:20px 0 0}p{color:var(--muted);font-size:clamp(17px,2vw,20px);line-height:1.55;margin:22px auto 0;max-width:35ch}.btn{display:inline-flex;align-items:center;justify-content:center;margin-top:34px;border-radius:100px;padding:16px 27px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;box-shadow:0 12px 30px -14px rgba(255,91,46,.8);transition:transform .25s}.btn:hover{transform:translateY(-2px)}
+    @keyframes appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes draw{to{stroke-dashoffset:0}}@media(max-width:480px){.logo{top:24px;left:24px}.logo img{width:122px}.check{width:96px;height:96px;margin-bottom:28px}.check svg{width:45px;height:45px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="glow"></div>
+    <a class="logo" href="/" aria-label="Studio 9"><img src="assets/studio9-logo.png" alt="Studio 9"></a>
+    <section class="content" aria-labelledby="title">
+      <div class="check" aria-hidden="true"><svg viewBox="0 0 52 52"><path d="m13 27 8.5 8.5L40 16.5"/></svg></div>
+      <div class="eyebrow">Заявката е приета</div>
+      <h1 id="title">Заявката е изпратена успешно.</h1>
+      <p>Ще се свържем с Вас скоро.</p>
+      <a class="btn" href="/">Към началната страница</a>
+    </section>
+  </main>
+</body>
+</html>

@@ -55,7 +55,7 @@ module.exports = async function contactHandler(req, res) {
     const smsBody = new URLSearchParams({
       To: phone,
       From: TWILIO_SENDER_ID,
-      Body: 'Благодарим Ви. Заявката е успешно получена и ще се свържем с Вас скоро.',
+      Body: 'Заявката е получена. Ще се свържем с Вас скоро.',
     });
     const twilioResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
       method: 'POST',

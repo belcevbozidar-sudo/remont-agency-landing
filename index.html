@@ -573,7 +573,7 @@ footer a:hover{color:var(--accent)}
       <button type="submit" class="btn magnet" style="justify-self:start">Изпрати <span class="arw">→</span></button>
       <p class="fine">Не изпращаме реклами. Данните ти се използват само за да се свържем с теб.</p>
     </form>
-    <div class="thanks" id="thx">Благодарим. Получихме запитването и ще се чуем до един работен ден.</div>
+    <div class="thanks" id="thx">Заявката е получена.</div>
   </div>
 </div>
 
@@ -747,9 +747,7 @@ footer a:hover{color:var(--accent)}
         body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim()})
       });
       if(!response.ok) throw new Error('Submission failed');
-      frm.style.display = 'none';
-      thx.textContent = 'Благодарим. Запитването е изпратено и ще се чуем до един работен ден.';
-      thx.style.display = 'block';
+      window.location.assign('/thank-you');
     }catch(err){
       thx.textContent = 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.';
       thx.style.display = 'block';
