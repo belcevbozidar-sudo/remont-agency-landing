@@ -17,11 +17,12 @@ module.exports = async function contactHandler(req, res) {
     CONVEX_SUBMISSION_SECRET,
     TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID,
+    NTFY_TOPIC,
     TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN,
     TWILIO_SENDER_ID,
   } = process.env;
-  if (!CONVEX_URL || !CONVEX_SUBMISSION_SECRET || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_SENDER_ID) {
+  if (!CONVEX_URL || !CONVEX_SUBMISSION_SECRET || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || !NTFY_TOPIC || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_SENDER_ID) {
     return res.status(500).json({ error: 'Формата временно не е настроена.' });
   }
 
@@ -75,12 +76,27 @@ module.exports = async function contactHandler(req, res) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
-        text: `Ново запитване от Studio 9\n\nТелефон: ${phone}\nБизнес: ${business}`,
+        text: `Ново запитване от ремонтен сайт\n\nТелефон: ${phone}\nБизнес: ${business}`,
       }),
     });
 
     if (!telegramResponse.ok) {
       throw new Error('Telegram request failed');
+    }
+
+    const ntfyResponse = await fetch(`https://ntfy.sh/${encodeURIComponent(NTFY_TOPIC)}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        Title: 'Ново запитване от ремонтен сайт',
+        Priority: '5',
+        Tags: 'hammer,calling',
+      },
+      body: `Телефон: ${phone}\nБизнес: ${business}`,
+    });
+
+    if (!ntfyResponse.ok) {
+      throw new Error('ntfy request failed');
     }
 
     return res.status(200).json({ ok: true });
