@@ -102,7 +102,7 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-35px)}}
 @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(36px,-24px)}}
 .hero .wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hero h1{margin:48px 0 0}
+.hero h1{margin:30px 0 0}
 .hero-title{font-family:Inter,sans-serif;font-size:clamp(42px,6.2vw,76px);line-height:1.05;font-weight:800;letter-spacing:-.015em;color:var(--text)}
 .hero h1 .ln{display:block;overflow:hidden}
 .hero h1 .ln > span{display:block;transform:translateY(110%);animation:riseIn .95s cubic-bezier(.16,1,.3,1) forwards}
@@ -117,14 +117,14 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .hero-sub span+span::before{content:" "}
 @media(max-width:699px){
   .hero{min-height:82svh;padding-top:88px;padding-bottom:28px}
-  .hero .wrap{transform:translateY(-42px)}
-  .hero h1{margin-top:48px}
+  .hero .wrap{transform:translateY(-54px)}
+  .hero h1{margin-top:30px}
   .hero-title{font-size:clamp(30px,8.8vw,46px);line-height:1.06;letter-spacing:-.02em}
   .hero-title-desktop{display:block}
   .hero-title-mobile{display:none}
   .hero-title-desktop .ln{white-space:nowrap}
-  .hero-sub{margin-top:24px;width:100%;text-align:center}
-  .hero-cta{margin-top:29px}
+  .hero-sub{margin-top:19px;width:100%;text-align:center}
+  .hero-cta{margin-top:24px}
 }
 @media(max-width:480px){.hero-sub{max-width:none;font-size:clamp(13.5px,4.15vw,15.6px);line-height:1.55;letter-spacing:-.025em;font-weight:500;color:#DCD9E1}.hero-sub span{display:block;white-space:nowrap}.hero-sub span+span::before{content:none}}
 .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}
@@ -163,14 +163,22 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .light .eyebrow{color:#6B6A72}
 .light .line{border-color:rgba(0,0,0,.10)}
 
-/* ---------- problem list ---------- */
-.prob{display:grid;gap:0;margin-top:44px;border-top:1px solid rgba(0,0,0,.10)}
-.prob-item{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid rgba(0,0,0,.10);transition:padding-left .4s cubic-bezier(.2,.8,.2,1)}
-.prob-item:hover{padding-left:10px}
-.prob-item .n{font-family:Unbounded;font-weight:800;font-size:13px;color:var(--accent);padding-top:3px}
-.prob-item h3{font-size:clamp(17px,2vw,21px);margin-bottom:5px}
-.prob-item p{color:#5C5B63;font-size:15px;max-width:60ch}
-@media(min-width:820px){.prob{grid-template-columns:1fr 1fr;column-gap:48px}.prob-item:nth-child(-n+2){border-top:0}}
+/* ---------- site check ---------- */
+.site-check{max-width:1040px;margin:0 auto}
+.site-check-title{font-family:Inter,Manrope,sans-serif;font-size:clamp(44px,7.2vw,86px);font-weight:800;letter-spacing:-.055em;line-height:.96;margin:17px 0 0}
+.site-check-title em{font-style:normal;color:var(--accent)}
+.site-check-list{position:relative;overflow:hidden;margin-top:44px;padding:14px clamp(20px,4vw,46px);border-radius:30px;background:linear-gradient(145deg,#1A1A1E,#0D0D0F);color:var(--text);box-shadow:0 28px 70px -42px rgba(0,0,0,.65)}
+.site-check-list::before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;top:-310px;right:-120px;background:radial-gradient(circle,rgba(255,91,46,.30),transparent 68%);pointer-events:none}
+.site-check-row{position:relative;display:grid;grid-template-columns:72px 1fr;gap:18px;align-items:center;padding:25px 0;border-bottom:1px solid rgba(255,255,255,.11)}
+.site-check-row:last-child{border-bottom:0}
+.site-check-index{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,91,46,.12);border:1px solid rgba(255,91,46,.34);font:800 11px/1 Unbounded,Arial,sans-serif;color:var(--accent)}
+.site-check-row p{font-family:Inter,Manrope,sans-serif;font-size:clamp(20px,3vw,31px);font-weight:700;letter-spacing:-.035em;line-height:1.15}
+.site-check-row p span{color:var(--muted);font-weight:500}
+.site-check-end{position:relative;margin:20px 0 0;padding:clamp(24px,4vw,38px);border-radius:24px;background:var(--accent);color:#fff;overflow:hidden}
+.site-check-end::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-76px;top:-165px;border:1px solid rgba(255,255,255,.28)}
+.site-check-end b{position:relative;display:block;font-family:Inter,Manrope,sans-serif;font-size:clamp(23px,3.1vw,37px);letter-spacing:-.045em;line-height:1.12;max-width:28ch}
+.site-check-end small{position:relative;display:block;margin-top:12px;font-size:15px;font-weight:600;color:rgba(255,255,255,.82)}
+@media(max-width:560px){.site-check-title{font-size:clamp(42px,12vw,60px)}.site-check-list{margin-top:30px;padding:10px 20px;border-radius:24px}.site-check-row{grid-template-columns:47px 1fr;gap:12px;padding:21px 0}.site-check-index{width:34px;height:34px;font-size:9px}.site-check-row p{font-size:21px}.site-check-end{margin-top:14px;border-radius:20px}.site-check-end b{font-size:25px}}
 
 /* ---------- features ---------- */
 .cards{display:grid;gap:14px;margin-top:48px}
@@ -379,24 +387,20 @@ footer a:hover{color:var(--accent)}
 
 <!-- PROBLEM -->
 <section class="sec light" id="problem">
-  <div class="wrap">
-    <div class="eyebrow rv">Честно казано</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">Работата ти е добра.<br>Сайтът ти - не.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:22px">Когато човек сравнява няколко фирми, често се обажда на тази, която изглежда сериозно. Обикновено проблемът не е в цената ти.</p>
+  <div class="wrap site-check">
+    <div class="eyebrow rv">Бърза проверка</div>
+    <h2 class="site-check-title rv" data-d="1">Ако сайтът ти...</h2>
 
-    <div class="prob">
-      <div class="prob-item rv"><div class="n">01</div><div>
-        <h3>Сайт от 2016-та, който никой не пипа</h3>
-        <p>Направен веднъж, платен веднъж, забравен. Всяка малка промяна опира до човек, който вече не вдига телефона.</p></div></div>
-      <div class="prob-item rv" data-d="1"><div class="n">02</div><div>
-        <h3>На телефон изглежда счупен</h3>
-        <p>8 от 10 клиенти го отварят от телефона. Ако там текстът е дребен и бутонът за обаждане го няма - вече сте загубили човека.</p></div></div>
-      <div class="prob-item rv" data-d="2"><div class="n">03</div><div>
-        <h3>Не личи ясно какво предлагате</h3>
-        <p>Има сайт, но услугите, районът и начинът за връзка не се виждат веднага. Човекът трябва да търси информацията сам.</p></div></div>
-      <div class="prob-item rv" data-d="3"><div class="n">04</div><div>
-        <h3>Запитванията идват, ти си на обекта</h3>
-        <p>Човек пише в 19:40, отговаряш на другия ден. Дотогава е взел друга оферта. Загубата е тиха, затова не се вижда.</p></div></div>
+    <div class="site-check-list">
+      <div class="site-check-row rv"><div class="site-check-index">01</div><p>е правен <span>през 2016-та.</span></p></div>
+      <div class="site-check-row rv" data-d="1"><div class="site-check-index">02</div><p>или изглежда зле <span>на телефон.</span></p></div>
+      <div class="site-check-row rv" data-d="2"><div class="site-check-index">03</div><p>или не става веднага ясно <span>какво предлагаш.</span></p></div>
+      <div class="site-check-row rv" data-d="3"><div class="site-check-index">04</div><p>или все още нямаш такъв, <span>а искаш професионална работа.</span></p></div>
+    </div>
+
+    <div class="site-check-end rv" data-d="4">
+      <b>Не ти трябва още един сайт. Трябва ти ясен първи екран.</b>
+      <small>Място, което казва важното още в първите секунди.</small>
     </div>
   </div>
 </section>
