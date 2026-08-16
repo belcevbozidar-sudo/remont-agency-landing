@@ -180,6 +180,23 @@ header.stuck{background:rgba(11,11,12,.72);backdrop-filter:blur(16px) saturate(1
 .site-check-end small{position:relative;display:block;margin-top:12px;font-size:15px;font-weight:600;color:rgba(255,255,255,.82)}
 @media(max-width:560px){.site-check-title{font-size:clamp(42px,12vw,60px)}.site-check-list{margin-top:30px;padding:10px 20px;border-radius:24px}.site-check-row{grid-template-columns:47px 1fr;gap:12px;padding:21px 0}.site-check-index{width:34px;height:34px;font-size:9px}.site-check-row p{font-size:21px}.site-check-end{margin-top:14px;border-radius:20px}.site-check-end b{font-size:25px}}
 
+/* ---------- laptop showcase ---------- */
+.moment{position:relative;background:#ffffff;padding:64px 0 72px}
+.moment-head{max-width:760px;margin:0 auto 24px;padding:0 24px;text-align:center}
+.moment-head h2{font-family:Inter,sans-serif;font-size:clamp(30px,4.6vw,58px);font-weight:700;letter-spacing:-.035em;line-height:1.05;color:#132238;margin:0 0 18px}
+.moment-head p{font-family:Inter,sans-serif;font-size:18px;line-height:1.5;color:#5f6b7a;max-width:34ch;margin:0 auto}
+.laptop-showcase{position:relative;max-width:2184px;margin:0 auto;padding:0 10px}
+.laptop-showcase::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:160px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.4) 35%,rgba(255,255,255,.92) 75%,#fff 100%);pointer-events:none;z-index:10}
+.laptop-stage{position:relative;width:min(100%,1950px);margin:0 auto;isolation:isolate;mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 97%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 97%)}
+.laptop-frame{display:block;width:100%;height:auto;mix-blend-mode:multiply;filter:saturate(.96) brightness(.99);user-select:none;pointer-events:none}
+.laptop-screen{position:absolute;top:24.7%;left:30.6%;width:38.1%;height:34.6%;overflow:hidden;border-radius:10px 10px 6px 6px;background:#edf5ff;box-shadow:inset 0 0 0 1px rgba(19,34,56,.08)}
+.laptop-screen::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0));pointer-events:none;z-index:3}
+.laptop-slide{position:absolute;inset:0;opacity:0;transform:translateX(-8%);transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .8s ease;z-index:1}
+.laptop-slide.is-active{opacity:1;transform:translateX(0);z-index:2}
+.laptop-slide.is-exit{opacity:0;transform:translateX(8%);z-index:1}
+.laptop-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+@media(max-width:560px){.moment{padding:88px 0 96px}.moment-head{margin-bottom:36px;padding:0 20px}.moment-head p{font-size:15.5px}.laptop-showcase{padding:0 8px;overflow:hidden}.laptop-stage{width:150%;max-width:none;margin-left:-25%}.laptop-screen{border-radius:6px 6px 4px 4px}}
+
 /* ---------- features ---------- */
 .cards{display:grid;gap:14px;margin-top:48px}
 @media(min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
@@ -401,6 +418,30 @@ footer a:hover{color:var(--accent)}
     <div class="site-check-end rv" data-d="4">
       <b>Не ти трябва още един сайт. Трябва ти ясен първи екран.</b>
       <small>Място, което казва важното още в първите секунди.</small>
+    </div>
+  </div>
+</section>
+
+<!-- LAPTOP SHOWCASE -->
+<section class="moment">
+  <div class="moment-head">
+    <h2>Сайт, който говори на идеалния ти клиент.</h2>
+    <p>Проучваме кой купува от теб и пишем сайта за него.</p>
+  </div>
+  <div class="laptop-showcase" data-laptop-interval="1500">
+    <div class="laptop-stage">
+      <img src="assets/laptop-showcase.webp" alt="Лаптоп макет" class="laptop-frame" decoding="async">
+      <div class="laptop-screen">
+        <div class="laptop-slide is-active"><img src="assets/laptop-examples/showcase-2.webp" alt="Примерен сайт 2" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-3.webp" alt="Примерен сайт 3" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-4.webp" alt="Примерен сайт 4" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-5.webp" alt="Примерен сайт 5" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-7.webp" alt="Примерен сайт 7" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-8.webp" alt="Примерен сайт 8" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-9.webp" alt="Примерен сайт 9" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-10.webp" alt="Примерен сайт 10" decoding="async"></div>
+        <div class="laptop-slide"><img src="assets/laptop-examples/showcase-11.webp" alt="Примерен сайт 11" decoding="async"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -747,6 +788,44 @@ footer a:hover{color:var(--accent)}
   window.addEventListener('scroll', requestStepsTimeline, {passive:true});
   window.addEventListener('resize', requestStepsTimeline);
   updateStepsTimeline();
+
+  /* Laptop showcase: the frame stays fixed while the sites inside it change. */
+  document.querySelectorAll('.laptop-showcase').forEach(function(showcase){
+    var slides = Array.prototype.slice.call(showcase.querySelectorAll('.laptop-slide'));
+    var interval = parseInt(showcase.getAttribute('data-laptop-interval'), 10) || 1500;
+    if(slides.length < 2) return;
+
+    var index = 0;
+    var timer = null;
+    var busy = false;
+
+    function resetState(slide){ slide.classList.remove('is-active', 'is-exit'); }
+    function advance(){
+      if(busy) return;
+      busy = true;
+      var current = slides[index];
+      var nextIndex = (index + 1) % slides.length;
+      var next = slides[nextIndex];
+      resetState(next);
+      next.offsetHeight;
+      current.classList.add('is-exit');
+      next.classList.add('is-active');
+      window.setTimeout(function(){
+        resetState(current);
+        index = nextIndex;
+        busy = false;
+      }, 820);
+    }
+    function start(){
+      clearInterval(timer);
+      timer = window.setInterval(advance, interval);
+    }
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) clearInterval(timer);
+      else start();
+    });
+    start();
+  });
 
   /* FAQ accordion */
   document.querySelectorAll('.q').forEach(function(q){
