@@ -727,7 +727,7 @@ footer a:hover{color:var(--accent)}
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) hideModal(); });
 
   /* form */
-  frm.addEventListener('submit', function(e){
+  frm.addEventListener('submit', async function(e){
     e.preventDefault();
     var ok = true;
     ['phone','business'].forEach(function(n){
@@ -736,8 +736,29 @@ footer a:hover{color:var(--accent)}
       else { f.style.borderColor = ''; }
     });
     if(!ok) return;
-    frm.style.display = 'none';
-    thx.style.display = 'block';
+    var submit = frm.querySelector('[type="submit"]');
+    var originalLabel = submit.innerHTML;
+    submit.disabled = true;
+    submit.textContent = 'Изпращаме...';
+    try{
+      var response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim()})
+      });
+      if(!response.ok) throw new Error('Submission failed');
+      frm.style.display = 'none';
+      thx.textContent = 'Благодарим. Запитването е изпратено и ще се чуем до един работен ден.';
+      thx.style.display = 'block';
+    }catch(err){
+      thx.textContent = 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.';
+      thx.style.display = 'block';
+      thx.style.color = '#FFB5A0';
+      thx.style.borderColor = 'rgba(255,91,46,.4)';
+      thx.style.background = 'rgba(255,91,46,.09)';
+      submit.disabled = false;
+      submit.innerHTML = originalLabel;
+    }
   });
 })();
 </script>

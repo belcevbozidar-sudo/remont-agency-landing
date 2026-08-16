@@ -1,0 +1,8 @@
+{
+  "name": "remont-agency-landing",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "convex": "^1.44.0"
+  }
+}
