@@ -60,51 +60,14 @@ module.exports = async function contactHandler(req, res) {
       throw new Error('Convex mutation failed');
     }
 
-    const smsBody = new URLSearchParams({
-      To: phone,
-      From: TWILIO_SENDER_ID,
-      Body: 'Заявката е получена. Ще се свържем с Вас скоро.',
+    const notificationResults = await Promise.allSettled([
+      sendSms(phone, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_SENDER_ID),
+      sendTelegram(phone, business, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID),
+      sendNtfy(phone, business, NTFY_TOPIC),
+    ]);
+    notificationResults.forEach((result) => {
+      if (result.status === 'rejected') console.error('Lead notification failed', result.reason);
     });
-    const twilioResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64')}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: smsBody.toString(),
-    });
-
-    if (!twilioResponse.ok) {
-      throw new Error('Twilio request failed');
-    }
-
-    const telegramResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text: `Ново запитване от ремонтен сайт\n\nТелефон: ${phone}\nБизнес: ${business}`,
-      }),
-    });
-
-    if (!telegramResponse.ok) {
-      throw new Error('Telegram request failed');
-    }
-
-    const ntfyResponse = await fetch(`https://ntfy.sh/${encodeURIComponent(NTFY_TOPIC)}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        Title: 'Ново запитване от ремонтен сайт',
-        Priority: '5',
-        Tags: 'hammer,calling',
-      },
-      body: `Телефон: ${phone}\nБизнес: ${business}`,
-    });
-
-    if (!ntfyResponse.ok) {
-      throw new Error('ntfy request failed');
-    }
 
     // Reporting must never prevent a valid enquiry from reaching the team.
     if (hasMarketingConsent && META_PIXEL_ID && META_CAPI_ACCESS_TOKEN) {
@@ -121,6 +84,49 @@ module.exports = async function contactHandler(req, res) {
     return res.status(502).json({ error: 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.' });
   }
 };
+
+async function sendSms(phone, accountSid, authToken, senderId) {
+  const smsBody = new URLSearchParams({
+    To: phone,
+    From: senderId,
+    Body: 'Заявката е получена. Ще се свържем с теб скоро.',
+  });
+  const response = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString('base64')}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: smsBody.toString(),
+  });
+  if (!response.ok) throw new Error('Twilio request failed');
+}
+
+async function sendTelegram(phone, business, botToken, chatId) {
+  const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: `Ново запитване от ремонтен сайт\n\nТелефон: ${phone}\nБизнес: ${business}`,
+    }),
+  });
+  if (!response.ok) throw new Error('Telegram request failed');
+}
+
+async function sendNtfy(phone, business, topic) {
+  const response = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      Title: 'Novo zapitvane ot remonten sait',
+      Priority: '5',
+      Tags: 'hammer,calling',
+    },
+    body: `Телефон: ${phone}\nБизнес: ${business}`,
+  });
+  if (!response.ok) throw new Error('ntfy request failed');
+}
 
 function normalizeBulgarianMobile(value) {
   const compact = value.replace(/[\s().-]/g, '');
