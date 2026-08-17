@@ -26,13 +26,13 @@
   --maxw:1180px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 body{
   font-feature-settings:"locl" 0;
   margin:0;background:var(--bg);color:var(--text);
   font-family:Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   font-size:clamp(15px,1.05vw,17px);line-height:1.6;
-  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  width:100%;max-width:100%;overflow-x:clip;-webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,.dsp{font-family:Unbounded,Manrope,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:.98;margin:0}
 p{margin:0}
@@ -263,7 +263,7 @@ ul{margin:0;padding:0}
   background:conic-gradient(from 0deg,transparent,rgba(255,91,46,.13),transparent 30%);animation:spin 9s linear infinite;z-index:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .price-card > *{position:relative;z-index:1}
-.price-card .btn{display:flex;width:max-content;margin:0 auto}
+.price-card .btn{display:flex;width:max-content;min-width:270px;padding-left:44px;padding-right:44px;margin:0 auto}
 .pnum{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:18px 0 6px}
 .pnum b{font-family:Unbounded;font-weight:800;font-size:clamp(44px,9vw,72px);line-height:.9;letter-spacing:-.04em}
 .pnum s{text-decoration:none;font-size:15px;color:var(--muted);padding-bottom:9px}
@@ -323,6 +323,7 @@ form{display:grid;gap:12px;margin-top:30px}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:rgba(255,91,46,.06)}
 .fld input::placeholder,.fld textarea::placeholder{color:#6E6C76}
 .fine{font-size:12.5px;color:#6E6C76;margin-top:4px}
+.modal-card form .btn[type="submit"]{width:100%;min-height:62px;justify-content:center}
 .thanks{display:none;padding:22px;border-radius:14px;background:rgba(216,255,68,.09);border:1px solid rgba(216,255,68,.25);color:var(--accent-2);font-weight:600;margin-top:18px}
 
 /* ---------- contact modal ---------- */
@@ -332,6 +333,16 @@ form{display:grid;gap:12px;margin-top:30px}
 .modal.open .modal-card{transform:none}
 .modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-size:26px;line-height:1;color:var(--text);transition:background .2s,border-color .2s}
 .modal-close:hover{background:var(--accent);border-color:var(--accent)}
+.modal.gate .modal-card{background:#f7f7f8;color:#132238;border-color:rgba(19,34,56,.14);box-shadow:0 25px 60px -15px rgba(0,0,0,.36)}
+.modal.gate .modal-close{color:#132238;border-color:rgba(19,34,56,.16)}
+.modal.gate .modal-close:hover{color:#fff;background:var(--accent);border-color:var(--accent)}
+.modal-gate{text-align:center;padding:12px 6px 4px}
+.modal-eyebrow{display:inline-block;color:#2456cf;font:700 12px/1.2 Inter,Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.modal-gate h2{font-family:Inter,Manrope,sans-serif;font-size:clamp(27px,5vw,43px);font-weight:800;letter-spacing:-.045em;line-height:1.15;color:#132238;margin:32px auto 28px;max-width:12ch}
+.modal-gate-actions{display:grid;gap:10px}
+.modal-gate-actions button{width:100%;min-height:64px;padding:14px 20px;border-radius:14px;font-weight:800;line-height:1.3}
+.modal-gate-back{border:1px solid rgba(19,34,56,.18);background:rgba(255,255,255,.66);color:#132238}
+.modal-gate-confirm{background:var(--accent);color:#fff;box-shadow:0 14px 28px -16px rgba(255,91,46,.85)}
 body.modal-open{overflow:hidden}
 
 /* ---------- footer ---------- */
@@ -341,6 +352,7 @@ footer a:hover{color:var(--accent)}
 .footer-links{display:flex;flex-wrap:wrap;gap:12px;font-size:13px}
 
 @media(max-width:899px){.frow2{gap:12px}}
+@media(max-width:699px){html,body{overflow-x:hidden;touch-action:pan-y}}
 
 /* progress */
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:80;width:0;transition:width .12s linear}
@@ -357,10 +369,10 @@ footer a:hover{color:var(--accent)}
     <nav class="navlinks">
       <a href="#kakvo">Какво включва</a>
       <a href="#kak">Как работим</a>
-      <a href="#cena">Цена</a>
+      <a href="#cena">Оферта</a>
       <a href="#nie">Кои сме ние</a>
     </nav>
-    <a href="#kontakt" class="btn magnet">Свържете се с нас</a>
+    <a href="#kontakt" class="btn magnet">Свържи се с нас</a>
   </div>
 </header>
 
@@ -448,16 +460,16 @@ footer a:hover{color:var(--accent)}
 <section class="included" id="kakvo">
   <div class="included-inner">
     <div class="included-head rv">
-      <h2>Цялостно решение и спокойствие за вашия бизнес</h2>
+      <h2>Цялостно решение и спокойствие за твоя бизнес</h2>
     </div>
     <div class="included-grid">
       <div class="included-item rv"><h3>Изработка на сайт</h3><p>Създаваме ясен и професионален сайт, изграден около услугите и работата ти.</p></div>
       <div class="included-item rv" data-d="1"><h3>SEO настройка</h3><p>Подготвяме структурата и съдържанието според услугите и района, в който работиш.</p></div>
-      <div class="included-item rv" data-d="2"><h3>Чатбот</h3><p>Поема първите въпроси и събира данни за запитването, когато е нужно.</p></div>
-      <div class="included-item rv" data-d="3"><h3>Домейн</h3><p>Помагаме с избора и настройването на домейн за твоя сайт.</p></div>
+      <div class="included-item rv" data-d="2"><h3>Чатбот</h3><p>24/7 отговаря на въпроси и събира данни от клиентите.</p></div>
+      <div class="included-item rv" data-d="3"><h3>Домейн .com</h3><p>Помагаме с избора и настройването на домейн за твоя сайт.</p></div>
       <div class="included-item rv" data-d="4"><h3>Копирайтинг</h3><p>Посланията са подредени ясно и говорят директно на хората, които искаш да достигнеш.</p></div>
       <div class="included-item rv" data-d="5"><h3>Хостинг и поддръжка</h3><p>Скорост, SSL, резервни копия и техническа грижа - наша отговорност.</p></div>
-      <div class="included-item rv" data-d="6"><h3>Неограничени редакции</h3><p>Пишеш ни какво да се промени и го правим, без допълнително заплащане.</p></div>
+      <div class="included-item rv" data-d="6"><h3>Неограничени редакции</h3><p>Пишеш ни какво да се промени и го правим по всяко време на годината, без допълнително заплащане.</p></div>
       <div class="included-item rv" data-d="7"><h3>Директна връзка</h3><p>Пишеш директно на нас - хората, които правят и поддържат сайта ти.</p></div>
     </div>
   </div>
@@ -473,8 +485,7 @@ footer a:hover{color:var(--accent)}
       <ul class="chk rv" data-d="3">
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Обучен с твоите услуги, райони и начин на работа</li>
         <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Пита правилните неща: обект, квадратура, срок</li>
-        <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Насочва към обаждане или оставя контакт за вас</li>
-        <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Не измисля цени - казва това, което сте определили</li>
+        <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Насочва към обаждане или оставя контакт за теб</li>
       </ul>
     </div>
 
@@ -486,10 +497,10 @@ footer a:hover{color:var(--accent)}
             <div><b>Асистент на фирмата</b><small>онлайн сега</small></div>
           </div>
           <div class="msgs" id="msgs">
-            <div class="msg usr" data-t="0">Здравейте, сменяте ли дограма на къща?</div>
-            <div class="msg bot" data-t="1">Да, работим с PVC и алуминий. За къща в кой град става въпрос?</div>
+            <div class="msg usr" data-t="0">Здравей, търся смяна на дограма за къща.</div>
+            <div class="msg bot" data-t="1">Работим с PVC и алуминий. За къща в кой град е?</div>
             <div class="msg usr" data-t="2">Пловдив, около 12 прозореца.</div>
-            <div class="msg bot" data-t="3">Благодаря. За да предадем запитването, как се казвате и на кой номер да ви потърсим?</div>
+            <div class="msg bot" data-t="3">За да предадем запитването, как се казваш и на кой номер да те потърсим?</div>
             <div class="msg usr" data-t="4">Иван Петров, 0888 123 456.</div>
             <div class="msg cta" data-t="5">📞 Записах данните и уведомих Георги. Очаквайте обаждане.</div>
           </div>
@@ -503,15 +514,15 @@ footer a:hover{color:var(--accent)}
 <section class="sec" id="kak">
   <div class="wrap">
     <div class="eyebrow rv">Как работим</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">От разговора до готовия сайт - 14 дни.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:20px">Твоята работа е около 40 минути общо. Останалото е при нас.</p>
+    <h2 class="rv" data-d="1" style="margin-top:18px">От заявката до готовия сайт.</h2>
+    <p class="lead rv" data-d="2" style="margin-top:20px">Попълваш контактната форма, а ние подготвяме безплатна демо версия. Ти решаваш дали да продължим.</p>
 
     <div class="steps">
       <div class="steps-line" aria-hidden="true"><div class="steps-line-fill"></div></div>
-      <div class="step rv"><div class="num">01</div><div class="step-copy"><h3>Разговор</h3><p>20 минути по телефона. Какво работиш, къде, за какви клиенти и какво ти носи най-добри пари.</p></div></div>
-      <div class="step rv" data-d="1"><div class="num">02</div><div class="step-copy"><h3>Материали</h3><p>Изпращаш снимки от обекти и телефон.</p></div></div>
-      <div class="step rv" data-d="2"><div class="num">03</div><div class="step-copy"><h3>Изработка</h3><p>Ние пишем текстовете, правим дизайна, настройваме SEO и обучаваме чатбота. Показваме ти готов вариант.</p></div></div>
-      <div class="step rv" data-d="3"><div class="num">04</div><div class="step-copy"><h3>Пускаме и поддържаме</h3><p>Сайтът тръгва. Оттам нататък всяка промяна е с едно съобщение до нас.</p></div></div>
+      <div class="step rv"><div class="num">01</div><div class="step-copy"><h3>Попълваш форма</h3><p>Оставяш телефон и кратко описание на бизнеса си.</p></div></div>
+      <div class="step rv" data-d="1"><div class="num">02</div><div class="step-copy"><h3>Безплатно демо</h3><p>Правим демо версия на сайта, за да видиш посоката и как би изглеждал.</p></div></div>
+      <div class="step rv" data-d="2"><div class="num">03</div><div class="step-copy"><h3>Ти решаваш</h3><p>Преглеждаш демото и решаваш дали искаш да продължим.</p></div></div>
+      <div class="step rv" data-d="3"><div class="num">04</div><div class="step-copy"><h3>Довършваме сайта</h3><p>След одобрение довършваме сайта и оставаме на разположение за бъдещите промени.</p></div></div>
     </div>
   </div>
 </section>
@@ -519,9 +530,8 @@ footer a:hover{color:var(--accent)}
 <!-- PRICE -->
 <section class="sec" id="cena" style="background:var(--surface);border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="eyebrow rv">Цена</div>
-    <h2 class="rv" data-d="1" style="margin-top:18px">Разумна инвестиция,<br>а не поредната сметка.</h2>
-    <p class="lead rv" data-d="2" style="margin-top:20px">Една цена за изработката, една малка месечна такса за всичко останало. Знаеш точно колко ти струва и през декември.</p>
+    <div class="eyebrow rv">Оферта</div>
+    <h2 class="rv" data-d="1" style="margin-top:18px">Цялостна инвестиция за твоя бизнес</h2>
 
     <div class="price-wrap">
       <div class="price-card rv" data-d="1">
@@ -535,23 +545,23 @@ footer a:hover{color:var(--accent)}
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Неограничени промени през цялата година</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> SEO настройка на сайта</li>
           <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Чатбот, обучен за твоята фирма</li>
-          <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Директна връзка с нас двамата</li>
+          <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Директна връзка с екипа</li>
+          <li><i class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5 4.5 9 10 3"/></svg></i> Сайтът остава твой завинаги</li>
         </ul>
         <a href="#kontakt" class="btn magnet">Заяви демо <span class="arw">→</span></a>
       </div>
 
       <div class="side">
         <div class="note rv" data-d="2">
-          <h3>Как да го сметнете</h3>
-          <p>Прецени инвестицията спрямо стойността на услугите си и нуждите на твоя бизнес.</p>
+          <p>Еднократната инвестиция от 690 евро ти дава ценен актив - сайтът, който остава твой завинаги.</p>
         </div>
         <div class="note rv" data-d="3">
           <span class="big">≈ 1 €/ден</span>
-          <p>Толкова излиза месечната такса. За сравнение - един ден работа на обект струва в пъти повече.</p>
+          <p>Толкова излиза месечното плащане. По-малко от едно излизане навън.</p>
         </div>
         <div class="note rv" data-d="4">
-          <h3>Какво НЕ доплащате</h3>
-          <p>Промени по текстове и снимки, нови секции, техническа поддръжка, ъпдейти, подновяване на хостинг. Няма такса „намеса“ и няма часова ставка.</p>
+          <h3>Това е всичко - без скрити такси.</h3>
+          <p>Имаш връзка с нас през цялата година.</p>
         </div>
       </div>
     </div>
@@ -591,10 +601,10 @@ footer a:hover{color:var(--accent)}
 
     <div class="faq">
       <div class="q rv"><button>А ако вече имам сайт?<span class="pm"></span></button><div class="ans"><p>Тогава го заменяме с нов и прехвърляме домейна ти. Ако старият сайт има работещи страници, ги пренасяме.</p></div></div>
-      <div class="q rv"><button>Колко време ми отнема на мен?<span class="pm"></span></button><div class="ans"><p>Около 40 минути общо: един разговор от 20 минути и изпращане на снимки и телефон. Текстовете пишем ние, ти само потвърждаваш.</p></div></div>
+      <div class="q rv"><button>Какво трябва да направя аз?<span class="pm"></span></button><div class="ans"><p>Попълваш формата и описваш накратко бизнеса си. Подготвяме безплатно демо, а ти решаваш дали да продължим.</p></div></div>
       <div class="q rv"><button>Наистина ли промените са без лимит?<span class="pm"></span></button><div class="ans"><p>Да, за съдържанието на сайта: текстове, снимки, цени, услуги, секции, контакти. Ако поискаш нещо голямо и напълно ново, ще ти кажем честно преди да започнем.</p></div></div>
       <div class="q rv"><button>Чий е сайтът и домейнът?<span class="pm"></span></button><div class="ans"><p>Твои са. Ако някога решиш да спреш, домейнът остава при теб и ти даваме съдържанието на сайта.</p></div></div>
-      <div class="q rv"><button>Работиш ли извън София?<span class="pm"></span></button><div class="ans"><p>Да, в цялата страна. Работим онлайн и по телефона, така че няма значение къде е фирмата ти.</p></div></div>
+      <div class="q rv"><button>Работиш ли извън София?<span class="pm"></span></button><div class="ans"><p>Да, в цялата страна. Работим дистанционно, така че няма значение къде е фирмата ти.</p></div></div>
       <div class="q rv"><button>Гарантирате ли ми клиенти?<span class="pm"></span></button><div class="ans"><p>Не. Никой честен човек не може да гарантира клиенти, позиции в търсачките или конкретен бизнес резултат. Правим ясен, бърз и удобен за ползване сайт; останалото зависи от услугите ти, пазара и търсенето в твоя район.</p></div></div>
     </div>
   </div>
@@ -606,8 +616,8 @@ footer a:hover{color:var(--accent)}
     <div class="cta-box rv">
       <div class="eyebrow">Следваща стъпка</div>
       <h2 style="margin-top:18px;max-width:16ch">Кажи ни с какво се занимаваш.</h2>
-      <p class="lead" style="margin-top:20px">Остави контакт и ще се чуем в рамките на един работен ден. Разговорът е кратък и без продаване - казваме ти директно дали има смисъл за твоята фирма.</p>
-      <a href="#kontakt" class="btn magnet" style="margin-top:30px">Запазете разговор <span class="arw">→</span></a>
+      <p class="lead" style="margin-top:20px">Попълни формата и ще направим безплатна демо версия на сайта. После ти решаваш дали да продължим.</p>
+      <a href="#kontakt" class="btn magnet" style="margin-top:30px">Заяви демо <span class="arw">→</span></a>
     </div>
   </div>
 </section>
@@ -615,14 +625,20 @@ footer a:hover{color:var(--accent)}
 <div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
   <div class="modal-card">
     <button class="modal-close" type="button" aria-label="Затвори">×</button>
-    <div class="eyebrow">Следваща стъпка</div>
-    <h2 id="contactTitle" style="margin-top:18px;font-size:clamp(27px,5vw,43px)">Кажи ни с какво се занимаваш.</h2>
-    <p class="lead" style="margin-top:18px">Остави телефон и кратко описание. Ще се чуем в рамките на един работен ден.</p>
-    <form id="frm" novalidate>
+    <div class="modal-gate" id="contactGate">
+      <span class="modal-eyebrow">Преди да продължиш</span>
+      <h2>Важно е да си прочел сайта и да си видял офертата.</h2>
+      <div class="modal-gate-actions">
+        <button class="modal-gate-back" id="contactReview" type="button">Върни се към сайта</button>
+        <button class="modal-gate-confirm" id="contactConfirm" type="button">Прочетох сайта и съм запознат с офертата</button>
+      </div>
+    </div>
+    <form id="frm" novalidate hidden>
+      <div class="eyebrow">Следваща стъпка</div>
+      <h2 id="contactTitle" style="margin-top:18px;font-size:clamp(27px,5vw,43px)">Кажи ни с какво се занимаваш.</h2>
       <div class="fld"><input type="tel" name="phone" placeholder="Телефон" autocomplete="tel" required></div>
       <div class="fld"><textarea name="business" placeholder="С какво точно се занимава твоят бизнес?" required></textarea></div>
-      <button type="submit" class="btn magnet" style="justify-self:start">Изпрати <span class="arw">→</span></button>
-      <p class="fine">Не изпращаме реклами. Данните ти се използват само за да се свържем с теб.</p>
+      <button type="submit" class="btn magnet">Изпрати <span class="arw">→</span></button>
     </form>
     <div class="thanks" id="thx">Заявката е получена.</div>
   </div>
@@ -827,16 +843,25 @@ footer a:hover{color:var(--accent)}
 
   /* contact popup */
   var modal = document.getElementById('contactModal'), closeModal = modal.querySelector('.modal-close'),
-      frm = document.getElementById('frm'), thx = document.getElementById('thx'), lastTrigger;
+      frm = document.getElementById('frm'), thx = document.getElementById('thx'), lastTrigger,
+      contactGate = document.getElementById('contactGate'), contactConfirm = document.getElementById('contactConfirm'),
+      contactReview = document.getElementById('contactReview');
+  function resetContactModal(){
+    contactGate.hidden = false;
+    frm.hidden = true;
+    modal.classList.add('gate');
+  }
   function openModal(trigger){
     lastTrigger = trigger;
+    resetContactModal();
     modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
-    setTimeout(function(){ frm.elements.phone.focus(); }, 50);
+    setTimeout(function(){ contactConfirm.focus(); }, 50);
   }
   function hideModal(){
     modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
+    resetContactModal();
     if(lastTrigger) lastTrigger.focus();
   }
   document.querySelectorAll('a[href="#kontakt"]').forEach(function(link){
@@ -845,6 +870,16 @@ footer a:hover{color:var(--accent)}
   closeModal.addEventListener('click', hideModal);
   modal.addEventListener('click', function(e){ if(e.target === modal) hideModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) hideModal(); });
+  contactConfirm.addEventListener('click', function(){
+    contactGate.hidden = true;
+    frm.hidden = false;
+    modal.classList.remove('gate');
+    setTimeout(function(){ frm.elements.phone.focus(); }, 50);
+  });
+  contactReview.addEventListener('click', function(){
+    hideModal();
+    requestAnimationFrame(function(){ document.getElementById('top').scrollIntoView({behavior:'smooth',block:'start'}); });
+  });
 
   /* form */
   frm.addEventListener('submit', async function(e){
