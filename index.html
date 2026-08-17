@@ -333,15 +333,15 @@ form{display:grid;gap:12px;margin-top:30px}
 .modal.open .modal-card{transform:none}
 .modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-size:26px;line-height:1;color:var(--text);transition:background .2s,border-color .2s}
 .modal-close:hover{background:var(--accent);border-color:var(--accent)}
-.modal.gate .modal-card{background:#f7f7f8;color:#132238;border-color:rgba(19,34,56,.14);box-shadow:0 25px 60px -15px rgba(0,0,0,.36)}
-.modal.gate .modal-close{color:#132238;border-color:rgba(19,34,56,.16)}
+.modal.gate .modal-card{background:linear-gradient(150deg,#19191E,#0D0D10);color:var(--text);border-color:var(--line);box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.modal.gate .modal-close{color:var(--text);border-color:var(--line)}
 .modal.gate .modal-close:hover{color:#fff;background:var(--accent);border-color:var(--accent)}
 .modal-gate{text-align:center;padding:12px 6px 4px}
-.modal-eyebrow{display:inline-block;color:#2456cf;font:700 12px/1.2 Inter,Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
-.modal-gate h2{font-family:Inter,Manrope,sans-serif;font-size:clamp(27px,5vw,43px);font-weight:800;letter-spacing:-.045em;line-height:1.15;color:#132238;margin:32px auto 28px;max-width:12ch}
+.modal-eyebrow{display:inline-block;color:var(--accent);font:700 12px/1.2 Inter,Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.modal-gate h2{font-family:Inter,Manrope,sans-serif;font-size:clamp(27px,5vw,43px);font-weight:800;letter-spacing:-.045em;line-height:1.15;color:var(--text);margin:32px auto 28px;max-width:12ch}
 .modal-gate-actions{display:grid;gap:10px}
 .modal-gate-actions button{width:100%;min-height:64px;padding:14px 20px;border-radius:14px;font-weight:800;line-height:1.3}
-.modal-gate-back{border:1px solid rgba(19,34,56,.18);background:rgba(255,255,255,.66);color:#132238}
+.modal-gate-back{border:1px solid var(--line);background:var(--surface-2);color:var(--text)}
 .modal-gate-confirm{background:var(--accent);color:#fff;box-shadow:0 14px 28px -16px rgba(255,91,46,.85)}
 body.modal-open{overflow:hidden}
 
