@@ -8,12 +8,13 @@ module.exports = async function contactHandler(req, res) {
 
   const submittedPhone = typeof req.body?.phone === 'string' ? req.body.phone.trim() : '';
   const business = typeof req.body?.business === 'string' ? req.body.business.trim() : '';
+  const website = typeof req.body?.website === 'string' ? req.body.website.trim() : '';
   const submittedEventId = typeof req.body?.eventId === 'string' ? req.body.eventId.trim() : '';
   const hasMarketingConsent = req.body?.hasMarketingConsent === true;
   const phone = normalizeBulgarianMobile(submittedPhone);
   const eventId = /^[a-zA-Z0-9_-]{8,100}$/.test(submittedEventId) ? submittedEventId : crypto.randomUUID();
 
-  if (!phone || !business || business.length > 2000) {
+  if (!phone || !business || business.length > 2000 || website.length > 500) {
     return res.status(400).json({ error: 'Въведи валиден български мобилен номер и кратко описание на бизнеса.' });
   }
 
@@ -44,7 +45,7 @@ module.exports = async function contactHandler(req, res) {
           industry: 'Ремонтен бизнес',
           problem: business,
           email: '',
-          website: '',
+          website,
           noChange: '',
           secret: CONVEX_SUBMISSION_SECRET,
         },
@@ -62,8 +63,8 @@ module.exports = async function contactHandler(req, res) {
 
     const notificationResults = await Promise.allSettled([
       sendSms(phone, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_SENDER_ID),
-      sendTelegram(phone, business, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID),
-      sendNtfy(phone, business, NTFY_TOPIC),
+      sendTelegram(phone, business, website, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID),
+      sendNtfy(phone, business, website, NTFY_TOPIC),
     ]);
     notificationResults.forEach((result) => {
       if (result.status === 'rejected') console.error('Lead notification failed', result.reason);
@@ -102,19 +103,19 @@ async function sendSms(phone, accountSid, authToken, senderId) {
   if (!response.ok) throw new Error('Twilio request failed');
 }
 
-async function sendTelegram(phone, business, botToken, chatId) {
+async function sendTelegram(phone, business, website, botToken, chatId) {
   const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       chat_id: chatId,
-      text: `Ново запитване от ремонтен сайт\n\nТелефон: ${phone}\nБизнес: ${business}`,
+      text: `Ново запитване от ремонтен сайт\n\nТелефон: ${phone}\nБизнес: ${business}${website ? `\nСайт: ${website}` : ''}`,
     }),
   });
   if (!response.ok) throw new Error('Telegram request failed');
 }
 
-async function sendNtfy(phone, business, topic) {
+async function sendNtfy(phone, business, website, topic) {
   const response = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
     method: 'POST',
     headers: {
@@ -123,7 +124,7 @@ async function sendNtfy(phone, business, topic) {
       Priority: '5',
       Tags: 'hammer,calling',
     },
-    body: `Телефон: ${phone}\nБизнес: ${business}`,
+    body: `Телефон: ${phone}\nБизнес: ${business}${website ? `\nСайт: ${website}` : ''}`,
   });
   if (!response.ok) throw new Error('ntfy request failed');
 }

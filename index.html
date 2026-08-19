@@ -364,11 +364,6 @@ footer a:hover{color:var(--accent)}
 
 /* progress */
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:80;width:0;transition:width .12s linear}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .glow,.marq-track,.scrollcue i,.hero h1 .ln>span,.fade-up{animation:none!important}
-  .hero h1 .ln>span,.fade-up{opacity:1;transform:none}
-}
 
 </style>
 </head>
@@ -646,9 +641,10 @@ footer a:hover{color:var(--accent)}
     </div>
     <form id="frm" novalidate hidden>
       <div class="eyebrow">Следваща стъпка</div>
-      <h2 id="contactTitle" style="margin-top:18px;font-size:clamp(27px,5vw,43px)">Кажи ни с какво се занимаваш.</h2>
+      <h2 id="contactTitle" style="margin-top:18px;font-size:clamp(27px,5vw,43px)">Опиши подробно с какво се занимаваш.</h2>
       <div class="fld"><input type="tel" name="phone" placeholder="Телефон" autocomplete="tel" required></div>
       <div class="fld"><textarea name="business" placeholder="С какво точно се занимава твоят бизнес?" required></textarea></div>
+      <div class="fld"><input type="text" name="website" placeholder="Сайт, ако имаш (по избор)" autocomplete="url" inputmode="url"></div>
       <button type="submit" class="btn magnet">Изпрати <span class="arw">→</span></button>
     </form>
     <div class="thanks" id="thx">Заявката е получена.</div>
@@ -668,7 +664,7 @@ footer a:hover{color:var(--accent)}
 
 <script>
 (function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = false;
   var desktop = window.matchMedia('(min-width: 900px)').matches;
 
   document.getElementById('yr').textContent = new Date().getFullYear();
@@ -949,7 +945,7 @@ footer a:hover{color:var(--accent)}
       var response = await fetch('/api/contact', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim(), eventId: eventId, hasMarketingConsent: hasMarketingConsent})
+        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim(), website: frm.elements.website.value.trim(), eventId: eventId, hasMarketingConsent: hasMarketingConsent})
       });
       if(!response.ok) throw new Error('Submission failed');
       window.location.assign('/thank-you');
