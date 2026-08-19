@@ -14,8 +14,14 @@ module.exports = async function contactHandler(req, res) {
   const phone = normalizeBulgarianMobile(submittedPhone);
   const eventId = /^[a-zA-Z0-9_-]{8,100}$/.test(submittedEventId) ? submittedEventId : crypto.randomUUID();
 
-  if (!phone || !business || business.length > 2000 || website.length > 500) {
-    return res.status(400).json({ error: 'Въведи валиден български мобилен номер и кратко описание на бизнеса.' });
+  if (!phone) {
+    return res.status(400).json({ error: 'Въведи валиден български мобилен номер - например 0882 489 182 или +359 882 489 182.' });
+  }
+  if (!business || business.length > 2000) {
+    return res.status(400).json({ error: 'Опиши подробно с какво се занимаваш.' });
+  }
+  if (website.length > 500) {
+    return res.status(400).json({ error: 'Адресът на сайта е твърде дълъг.' });
   }
 
   const {

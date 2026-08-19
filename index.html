@@ -922,15 +922,40 @@ footer a:hover{color:var(--accent)}
   });
 
   /* form */
+  function normalizeBulgarianMobile(value){
+    var compact = value.replace(/[\s().-]/g, '');
+    if(/^08\d{8}$/.test(compact)) return '+359' + compact.slice(1);
+    if(/^\+3598\d{8}$/.test(compact)) return compact;
+    if(/^3598\d{8}$/.test(compact)) return '+' + compact;
+    return '';
+  }
+  function showFormError(message, field){
+    thx.textContent = message;
+    thx.style.display = 'block';
+    thx.style.color = '#FFB5A0';
+    thx.style.borderColor = 'rgba(255,91,46,.4)';
+    thx.style.background = 'rgba(255,91,46,.09)';
+    if(field){
+      field.style.borderColor = '#FF5B2E';
+      field.focus();
+    }
+  }
   frm.addEventListener('submit', async function(e){
     e.preventDefault();
-    var ok = true;
-    ['phone','business'].forEach(function(n){
-      var f = frm.elements[n];
-      if(!f.value.trim()){ ok = false; f.style.borderColor = '#FF5B2E'; }
-      else { f.style.borderColor = ''; }
-    });
-    if(!ok) return;
+    thx.style.display = 'none';
+    var phoneField = frm.elements.phone;
+    var businessField = frm.elements.business;
+    var normalizedPhone = normalizeBulgarianMobile(phoneField.value.trim());
+    phoneField.style.borderColor = '';
+    businessField.style.borderColor = '';
+    if(!normalizedPhone){
+      showFormError('Въведи валиден български мобилен номер - например 0882 489 182 или +359 882 489 182.', phoneField);
+      return;
+    }
+    if(!businessField.value.trim()){
+      showFormError('Опиши подробно с какво се занимаваш.', businessField);
+      return;
+    }
     var submit = frm.querySelector('[type="submit"]');
     var originalLabel = submit.innerHTML;
     submit.disabled = true;
@@ -945,16 +970,17 @@ footer a:hover{color:var(--accent)}
       var response = await fetch('/api/contact', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({phone: frm.elements.phone.value.trim(), business: frm.elements.business.value.trim(), website: frm.elements.website.value.trim(), eventId: eventId, hasMarketingConsent: hasMarketingConsent})
+        body: JSON.stringify({phone: normalizedPhone, business: businessField.value.trim(), website: frm.elements.website.value.trim(), eventId: eventId, hasMarketingConsent: hasMarketingConsent})
       });
-      if(!response.ok) throw new Error('Submission failed');
+      var result = {};
+      try { result = await response.json(); } catch(parseError) {}
+      if(!response.ok) throw new Error(result.error || 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.');
       window.location.assign('/thank-you');
     }catch(err){
-      thx.textContent = 'Не успяхме да изпратим запитването. Опитай отново малко по-късно.';
-      thx.style.display = 'block';
-      thx.style.color = '#FFB5A0';
-      thx.style.borderColor = 'rgba(255,91,46,.4)';
-      thx.style.background = 'rgba(255,91,46,.09)';
+      var message = err && err.message && err.message !== 'Failed to fetch'
+        ? err.message
+        : 'Не успяхме да изпратим запитването. Провери връзката си и опитай отново.';
+      showFormError(message);
       submit.disabled = false;
       submit.innerHTML = originalLabel;
     }
