@@ -15,7 +15,7 @@ module.exports = async function contactHandler(req, res) {
   const eventId = /^[a-zA-Z0-9_-]{8,100}$/.test(submittedEventId) ? submittedEventId : crypto.randomUUID();
 
   if (!phone) {
-    return res.status(400).json({ error: 'Въведи валиден български мобилен номер - например 0882 489 182 или +359 882 489 182.' });
+    return res.status(400).json({ error: 'Номерът не е валиден. Въведи валиден български мобилен номер.' });
   }
   if (!business || business.length > 2000) {
     return res.status(400).json({ error: 'Опиши подробно с какво се занимаваш.' });

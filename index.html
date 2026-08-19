@@ -949,7 +949,7 @@ footer a:hover{color:var(--accent)}
     phoneField.style.borderColor = '';
     businessField.style.borderColor = '';
     if(!normalizedPhone){
-      showFormError('Въведи валиден български мобилен номер - например 0882 489 182 или +359 882 489 182.', phoneField);
+      showFormError('Номерът не е валиден. Въведи валиден български мобилен номер.', phoneField);
       return;
     }
     if(!businessField.value.trim()){
